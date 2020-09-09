@@ -3,9 +3,11 @@ package com.atguigu.sparsearray;
 public class SparseArray {
 
 	public static void main(String[] args) {
+
+		int chessSize = 11;
 		// 创建一个原始的二维数组 11 * 11
 		// 0: 表示没有棋子， 1 表示 黑子 2 表蓝子
-		int chessArr1[][] = new int[11][11];
+		int chessArr1[][] = new int[chessSize][chessSize];
 		chessArr1[1][2] = 1;
 		chessArr1[2][3] = 2;
 		chessArr1[4][5] = 2;
@@ -21,8 +23,8 @@ public class SparseArray {
 		// 将二维数组 转 稀疏数组的思
 		// 1. 先遍历二维数组 得到非0数据的个数
 		int sum = 0;
-		for (int i = 0; i < 11; i++) {
-			for (int j = 0; j < 11; j++) {
+		for (int i = 0; i < chessSize; i++) {
+			for (int j = 0; j < chessSize; j++) {
 				if (chessArr1[i][j] != 0) {
 					sum++;
 				}
@@ -32,14 +34,14 @@ public class SparseArray {
 		// 2. 创建对应的稀疏数组
 		int sparseArr[][] = new int[sum + 1][3];
 		// 给稀疏数组赋值
-		sparseArr[0][0] = 11;
-		sparseArr[0][1] = 11;
+		sparseArr[0][0] = chessSize;
+		sparseArr[0][1] = chessSize;
 		sparseArr[0][2] = sum;
 
 		// 遍历二维数组，将非0的值存放到 sparseArr中
 		int count = 0; // count 用于记录是第几个非0数据
-		for (int i = 0; i < 11; i++) {
-			for (int j = 0; j < 11; j++) {
+		for (int i = 0; i < chessSize; i++) {
+			for (int j = 0; j < chessSize; j++) {
 				if (chessArr1[i][j] != 0) {
 					count++;
 					sparseArr[count][0] = i;
@@ -59,7 +61,7 @@ public class SparseArray {
 
 		// 将稀疏数组 --》 恢复成 原始的二维数组
 		/*
-		 * 1. 先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组，比如上面的 chessArr2 = int [11][11] 2.
+		 * 1. 先读取稀疏数组的第一行，根据第一行的数据，创建原始的二维数组，比如上面的 chessArr2 = int [chessSize][chessSize] 2.
 		 * 在读取稀疏数组后几行的数据，并赋给 原始的二维数组 即可.
 		 */
 
