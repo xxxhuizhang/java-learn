@@ -17,12 +17,19 @@ package jvm.oom;
  *
  * */
 
+import java.lang.reflect.Method;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
 
-import java.lang.reflect.Method;
+//import net.sf.cglib.proxy.Enhancer;
+//import net.sf.cglib.proxy.MethodInterceptor;
+//import net.sf.cglib.proxy.MethodProxy;
 
+
+
+//-Xms10m -Xmx10m -XX:MaxDirectMemorySize=5m -XX:+PrintGCDetails
+//java.lang.OutOfMemoryError: GC overhead limit exceeded
 public class MetaspaceOOMTest {
     static class OOMTest {
 
