@@ -36,53 +36,6 @@ public class BubbleSort {
 
 		//System.out.println("排序后");
 		//System.out.println(Arrays.toString(arr));
-
-
-		/*
-
-		// 第二趟排序，就是将第二大的数排在倒数第二位
-
-		for (int j = 0; j < arr.length - 1 - 1 ; j++) {
-			// 如果前面的数比后面的数大，则交换
-			if (arr[j] > arr[j + 1]) {
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		}
-
-		System.out.println("第二趟排序后的数组");
-		System.out.println(Arrays.toString(arr));
-
-
-		// 第三趟排序，就是将第三大的数排在倒数第三位
-
-		for (int j = 0; j < arr.length - 1 - 2; j++) {
-			// 如果前面的数比后面的数大，则交换
-			if (arr[j] > arr[j + 1]) {
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		}
-
-		System.out.println("第三趟排序后的数组");
-		System.out.println(Arrays.toString(arr));
-
-		// 第四趟排序，就是将第4大的数排在倒数第4位
-
-		for (int j = 0; j < arr.length - 1 - 3; j++) {
-			// 如果前面的数比后面的数大，则交换
-			if (arr[j] > arr[j + 1]) {
-				temp = arr[j];
-				arr[j] = arr[j + 1];
-				arr[j + 1] = temp;
-			}
-		}
-
-		System.out.println("第四趟排序后的数组");
-		System.out.println(Arrays.toString(arr)); */
-
 	}
 
 	// 将前面额冒泡排序算法，封装成一个方法

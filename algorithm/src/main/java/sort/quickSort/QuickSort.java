@@ -1,4 +1,4 @@
-package sort;
+package sort.quickSort;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
