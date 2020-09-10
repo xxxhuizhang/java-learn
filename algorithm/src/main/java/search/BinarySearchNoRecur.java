@@ -1,4 +1,4 @@
-package binarysearchnorecursion;
+package search;
 
 public class BinarySearchNoRecur {
 
