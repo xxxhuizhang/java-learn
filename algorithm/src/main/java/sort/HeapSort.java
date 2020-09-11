@@ -2,6 +2,16 @@ package sort;
 
 import java.util.Arrays;
 
+/**
+ * 堆是具有以下性质的完全二叉树：每个结点的值都大于或等于其左右孩子结点的值，称为大顶堆.
+ * 注意 : 没有要求结点的左孩子的值和右孩子的值的大小关系。
+ * 大顶堆特点：arr[i] >= arr[2*i+1] && arr[i] >= arr[2*i+2]  // i 对应第几个节点，i从0开始编号
+ * 小顶堆特点：arr[i] <= arr[2*i+1] && arr[i] <= arr[2*i+2]
+ *
+ *
+ *
+ */
+
 public class HeapSort {
 
 	public static void main(String[] args) {

@@ -6,7 +6,7 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dataStructure" />
+        <module name="algorithm" />
         <module name="design-pattern" />
         <module name="interview" />
         <module name="mybatis-mbg" />
@@ -17,7 +17,7 @@
         <module name="mp03" />
         <module name="mp02" />
         <module name="mp01" />
-        <module name="algorithm" />
+        <module name="dataStructure" />
         <module name="juc-demo" />
         <module name="nio" />
       </profile>
