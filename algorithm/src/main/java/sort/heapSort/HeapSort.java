@@ -1,4 +1,4 @@
-package sort;
+package sort.heapSort;
 
 import java.util.Arrays;
 

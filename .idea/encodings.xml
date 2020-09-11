@@ -18,11 +18,11 @@
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/search/InsertValueSearch.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/search/SeqSearch.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/BubbleSort.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/HeapSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/InsertSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/RadixSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/SelectSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/ShellSort.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/heapSort/HeapSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/mergeSort/MergetSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/sort/quickSort/QuickSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/avl/AVLTreeDemo.java" charset="UTF-8" />
