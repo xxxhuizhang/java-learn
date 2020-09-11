@@ -23,20 +23,15 @@ public class ShellSort {
 //			arr[i] = (int) (Math.random() * 8000000); // 生成一个[0, 8000000) 数
 //		}
 
-        System.out.println("排序前");
-        Date data1 = new Date();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String date1Str = simpleDateFormat.format(data1);
-        System.out.println("排序前的时间是=" + date1Str);
+        System.out.println("排序前:" + Arrays.toString(arr));
+        long before = System.currentTimeMillis();
 
-//		shellSort(arr); //交换式
+        //shellSort(arr); //交换式
         shellSort2(arr);// 移位方式
 
-        Date data2 = new Date();
-        String date2Str = simpleDateFormat.format(data2);
-        System.out.println("排序前的时间是=" + date2Str);
+        System.out.println("排序的时间是=" + (System.currentTimeMillis() - before));
+        System.out.println("排序后=" + Arrays.toString(arr));
 
-        System.out.println(Arrays.toString(arr));
     }
 
     // 对交换式的希尔排序进行优化->移位法

@@ -26,8 +26,8 @@ public class MergetSort {
         int temp[] = new int[arr.length]; // 归并排序需要一个额外空间
         mergeSort(arr, 0, arr.length - 1, temp);
 
-        System.out.println("排序前的时间是=" + (System.currentTimeMillis() - before));
-        System.out.println("归并排序后=" + Arrays.toString(arr));
+        System.out.println("排序的时间是=" + (System.currentTimeMillis() - before));
+        System.out.println("排序后=" + Arrays.toString(arr));
     }
 
     // 分+合方法

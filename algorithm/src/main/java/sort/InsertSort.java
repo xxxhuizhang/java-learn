@@ -12,16 +12,13 @@ public class InsertSort {
 //			arr[i] = (int) (Math.random() * 8000000); // 生成一个[0, 8000000) 数
 //		}
 
-        System.out.println("插入排序前");
-        Long before = System.currentTimeMillis();
-        System.out.println("排序前的时间是=" + before);
+        System.out.println("排序前:" + Arrays.toString(arr));
+        long before = System.currentTimeMillis();
 
         insertSort(arr); //调用插入排序算法
 
-        Long after = System.currentTimeMillis();
-        System.out.println("排序前的时间是=" + after);
-
-        System.out.println(Arrays.toString(arr));
+        System.out.println("排序的时间是=" + (System.currentTimeMillis() - before));
+        System.out.println("排序后=" + Arrays.toString(arr));
 
     }
 
