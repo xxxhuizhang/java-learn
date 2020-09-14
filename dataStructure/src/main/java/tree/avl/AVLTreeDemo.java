@@ -1,9 +1,10 @@
 package tree.avl;
 
 /*
- * 哈夫曼树(Huffman Tree) HuffmanTree
+ * 哈夫曼树 (Huffman Tree) HuffmanTree
  * 二叉排序树：BST: (Binary Sort(Search) Tree) BinarySortTreeDemo
  * 平衡二叉树 AVL (self-balancing binary search tree) AVLTreeDemo
+ *
  */
 
 

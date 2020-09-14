@@ -1,4 +1,4 @@
-package huffmancode;
+package tree.huffmanTree.huffmancode;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
