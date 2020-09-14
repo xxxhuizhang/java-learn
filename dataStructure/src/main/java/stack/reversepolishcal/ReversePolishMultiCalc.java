@@ -1,4 +1,4 @@
-package reversepolishcal;
+package stack.reversepolishcal;
 
 import java.util.ArrayList;
 import java.util.Collections;

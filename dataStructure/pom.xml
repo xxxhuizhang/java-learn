@@ -11,5 +11,14 @@
 
     <artifactId>dataStructure</artifactId>
 
+<!--    <dependencies>-->
+<!--        <dependency>-->
+<!--            <groupId>junit</groupId>-->
+<!--            <artifactId>junit</artifactId>-->
+<!--            <version>4.9</version>-->
+<!--            &lt;!&ndash;            <scope>test</scope>&ndash;&gt;-->
+<!--        </dependency>-->
+<!--    </dependencies>-->
+
 
 </project>

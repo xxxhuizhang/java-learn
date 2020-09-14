@@ -1,4 +1,4 @@
-package avl;
+package tree.redBlackTree;
 /*
  * 
  * ƽ���������B����B+����B*�� �������һ����Ͷ�������

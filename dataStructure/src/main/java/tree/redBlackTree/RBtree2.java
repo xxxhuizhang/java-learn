@@ -1,4 +1,4 @@
-package avl;
+package tree.redBlackTree;
 
 import java.util.Comparator;
 

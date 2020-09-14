@@ -1,4 +1,4 @@
-package avl;
+package tree.avl;
 
 /*
  * 哈夫曼树(Huffman Tree) HuffmanTree
