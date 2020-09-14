@@ -20,11 +20,18 @@ import java.util.Arrays;
 
 public class HeapSort {
 
+
+    /*
+                 4
+                / \
+               6   8
+              / \
+             5   9
+     */
+
     public static void main(String[] args) {
         //要求将数组进行升序排序
         int arr[] = {4, 6, 8, 5, 9};
-        heapSort(arr);
-        System.out.println("排序后=" + Arrays.toString(arr));
 
         // 创建要给80000个的随机的数组
 //		int[] arr = new int[8000000];

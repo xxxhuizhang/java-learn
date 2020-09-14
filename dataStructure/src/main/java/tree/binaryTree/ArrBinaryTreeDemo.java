@@ -1,5 +1,16 @@
 package tree.binaryTree;
 
+
+/**
+ * 由有序数组引出顺序储存
+ * n表示二叉树中的第几个元素(按0开始编号)
+ * 1.顺序二叉树通常只考虑完全二叉树
+ * 2.第n个元素的左子节点为  2 * n + 1
+ * 3.第n个元素的右子节点为  2 * n + 2
+ * 4.第n个元素的父节点为  (n-1) / 2
+ *
+ */
+
 public class ArrBinaryTreeDemo {
 
 	public static void main(String[] args) {
@@ -63,7 +74,7 @@ class ArrBinaryTree {
 	public void infixOrder(int index) {
 		// 如果数组为空，或者 arr.length = 0
 		if (arr == null || arr.length == 0) {
-			System.out.println("数组为空，不能按照二叉树的前序遍历");
+			System.out.println("数组为空，不能按照二叉树的中序遍历");
 		}
 		// 向左递归遍历
 		if ((index * 2 + 1) < arr.length) {
@@ -80,7 +91,7 @@ class ArrBinaryTree {
 	public void postOrde(int index) {
 		// 如果数组为空，或者 arr.length = 0
 		if (arr == null || arr.length == 0) {
-			System.out.println("数组为空，不能按照二叉树的前序遍历");
+			System.out.println("数组为空，不能按照二叉树的后序遍历");
 		}
 		// 向左递归遍历
 		if ((index * 2 + 1) < arr.length) {
