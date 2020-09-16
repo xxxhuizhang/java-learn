@@ -9,7 +9,6 @@ public class ViolenceMatch {
 		String str2 = "尚硅谷你尚硅你~";
 		int index = violenceMatch(str1, str2);
 		System.out.println("index=" + index);
-
 	}
 
 	// 暴力匹配算法实现
@@ -23,7 +22,6 @@ public class ViolenceMatch {
 		int i = 0; // i索引指向s1
 		int j = 0; // j索引指向s2
 		while (i < s1Len && j < s2Len) {// 保证匹配时，不越界
-
 			if(s1[i] == s2[j]) {//匹配ok
 				i++;
 				j++;

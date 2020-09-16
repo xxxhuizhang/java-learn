@@ -2,15 +2,15 @@
 <project version="4">
   <component name="Encoding">
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/dac/Hanoitower.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/dijkstra/DijkstraAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/dynamic/KnapsackProblem.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/floyd/FloydAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/greedy/GreedyAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/horse/HorseChessboard.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/kmp/KMPAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/kmp/ViolenceMatch.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/kruskal/KruskalCase.java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/prim/PrimAlgorithm.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/mst/dijkstra/DijkstraAlgorithm.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/mst/floyd/FloydAlgorithm.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/mst/kruskal/KruskalCase.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/algorithm/src/main/java/mst/prim/PrimAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/raft/raftAlgorithm.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/recursion/MiGong.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/algorithm/src/main/java/recursion/Queue8.java" charset="UTF-8" />
@@ -42,6 +42,7 @@
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/stack/Calculator.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/stack/PolandNotation.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/stack/reversepolishcal/ReversePolishMultiCalc.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/tree/BTree/BTree.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/tree/HeapSort.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/tree/avl/AVLTreeDemo.java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dataStructure/src/main/java/tree/bPlusTree/BPlusTree.java" charset="UTF-8" />

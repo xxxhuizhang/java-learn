@@ -4,6 +4,28 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Comparator;
 
+/**
+ * 马踏棋盘算法也被称为骑士周游问题
+ * 将马随机放在国际象棋的8×8棋盘Board[0～7][0～7]的某个方格中，马按走棋规则(马走日字)进行移动。
+ * 要求每个方格只进入一次，走遍棋盘上全部64个方格
+ * 游戏演示: http://www.4399.com/flash/146267_2.htm
+ *
+ *
+ * 马踏棋盘问题(骑士周游问题)实际上是图的深度优先搜索(DFS)的应用。
+ * 如果使用回溯（就是深度优先搜索）来解决，假如马儿踏了53个点，
+ * 如图：走到了第53个，坐标（1,0），发现已经走到尽头，没办法，
+ * 那就只能回退了，查看其他的路径，就在棋盘上不停的回溯…… ，思路分析+代码实现
+ * 分析第一种方式的问题，并使用贪心算法（greedyalgorithm）进行优化。解决马踏棋盘问题.
+ * 使用前面的游戏来验证算法是否正确。
+ *
+ *
+ * 1,2,3,4,5,.:递增排列
+ * 9,8,7,6,5.:递减排列
+ * 1,2,3,3,4,5,8,8,.:非递减排列
+ * 9,8,7,7,6,5,5,2,1,.:非递增排列
+ *
+ */
+
 public class HorseChessboard {
 
 	private static int X; // 棋盘的列数
@@ -91,12 +113,16 @@ public class HorseChessboard {
 		if ((p1.x = curPoint.x - 2) >= 0 && (p1.y = curPoint.y - 1) >= 0) {
 			ps.add(new Point(p1));
 		}
+		// 判断马儿可以走4这个位置
+		if ((p1.x = curPoint.x - 2) >= 0 && (p1.y = curPoint.y + 1) < Y) {
+			ps.add(new Point(p1));
+		}
 		// 判断马儿可以走6这个位置
 		if ((p1.x = curPoint.x - 1) >= 0 && (p1.y = curPoint.y - 2) >= 0) {
 			ps.add(new Point(p1));
 		}
-		// 判断马儿可以走7这个位置
-		if ((p1.x = curPoint.x + 1) < X && (p1.y = curPoint.y - 2) >= 0) {
+		// 判断马儿可以走3这个位置
+		if ((p1.x = curPoint.x - 1) >= 0 && (p1.y = curPoint.y + 2) < Y) {
 			ps.add(new Point(p1));
 		}
 		// 判断马儿可以走0这个位置
@@ -111,12 +137,8 @@ public class HorseChessboard {
 		if ((p1.x = curPoint.x + 1) < X && (p1.y = curPoint.y + 2) < Y) {
 			ps.add(new Point(p1));
 		}
-		// 判断马儿可以走3这个位置
-		if ((p1.x = curPoint.x - 1) >= 0 && (p1.y = curPoint.y + 2) < Y) {
-			ps.add(new Point(p1));
-		}
-		// 判断马儿可以走4这个位置
-		if ((p1.x = curPoint.x - 2) >= 0 && (p1.y = curPoint.y + 1) < Y) {
+		// 判断马儿可以走7这个位置
+		if ((p1.x = curPoint.x + 1) < X && (p1.y = curPoint.y - 2) >= 0) {
 			ps.add(new Point(p1));
 		}
 		return ps;
