@@ -1,11 +1,5 @@
 package com.atguigu.mp.test;
 
-import javax.swing.text.DefaultStyledDocument.AttributeUndoableEdit;
-
-import org.junit.Test;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
@@ -14,8 +8,9 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DbType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.junit.Test;
 
-public class TestMP {
+public class TestGenerator {
 
 	/**
 	 * 代码生成    示例代码
