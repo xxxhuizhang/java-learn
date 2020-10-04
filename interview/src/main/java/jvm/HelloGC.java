@@ -36,6 +36,6 @@ public class HelloGC {
         //-Xms10m -Xmx10m -XX:+PrintGCDetails -XX:+UseSerialGC -XX:SurvivorRatio=4 (UseSerialGC设置之后才生效)
         //-Xms10m -Xmx10m -XX:+PrintGCDetails -XX:NewRatio=4
 
-        //byte[] bytes = new byte[50 * 1024 * 1024];
+        byte[] bytes = new byte[50 * 1024 * 1024];
     }
 }

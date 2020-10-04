@@ -1,4 +1,4 @@
-package thread.lock;
+package thread.lock.deadLock;
 
 
 /*
@@ -39,14 +39,14 @@ class HoldLockThread implements Runnable {
     @Override
     public void run() {
         synchronized (lockA) {
-            System.out.println(Thread.currentThread().getName() + "\t自己持有：" + lockA + "\t尝试获取：" + lockB);
+            System.out.println(Thread.currentThread().getName() + "\t自己持有11：" + lockA + "\t尝试获取：" + lockB);
             try {
                 //TimeUnit.SECONDS.sleep(2);
             } catch (Exception e) {
                 e.printStackTrace();
             }
             synchronized (lockB) {
-                System.out.println(Thread.currentThread().getName() + "\t自己持有：" + lockB + "\t尝试获取：" + lockA);
+                System.out.println(Thread.currentThread().getName() + "\t自己持有22：" + lockB + "\t尝试获取：" + lockA);
             }
         }
     }

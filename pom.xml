@@ -29,6 +29,7 @@
         <module>interview</module>
         <module>juc-demo</module>
         <module>nio</module>
+        <module>java</module>
     </modules>
 
     <dependencies>

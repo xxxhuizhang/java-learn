@@ -9,7 +9,6 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
-
     <!-- 数据源 -->
     <context:property-placeholder location="classpath:db.properties"/>
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
@@ -27,7 +26,8 @@
     <!-- 基于注解的事务管理 -->
     <tx:annotation-driven transaction-manager="dataSourceTransactionManager"/>
 
-    <!--  配置SqlSessionFactoryBean
+    <!--
+        配置SqlSessionFactoryBean
         Mybatis提供的: org.mybatis.spring.SqlSessionFactoryBean
         MP提供的:com.baomidou.mybatisplus.spring.MybatisSqlSessionFactoryBean
      -->
@@ -37,7 +37,6 @@
         <property name="configLocation" value="classpath:mybatis-config.xml"></property>
         <!-- 别名处理 -->
         <property name="typeAliasesPackage" value="com.atguigu.mp.beans"></property>
-
         <!-- 注入全局MP策略配置 -->
         <property name="globalConfig" ref="globalConfiguration"></property>
     </bean>
@@ -52,9 +51,7 @@
         <property name="tablePrefix" value="tbl_"></property>
     </bean>
 
-    <!--
-        配置mybatis 扫描mapper接口的路径
-     -->
+    <!--配置mybatis 扫描mapper接口的路径 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
         <property name="basePackage" value="com.atguigu.mp.mapper"></property>
     </bean>

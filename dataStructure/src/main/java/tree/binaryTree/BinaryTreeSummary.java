@@ -1,5 +1,7 @@
 package tree.binaryTree;
 
+import org.junit.Test;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -31,7 +33,6 @@ import java.util.Stack;
  * 12. 求二叉树中节点的最大距离：getMaxDistanceRec
  * 13. 由前序遍历序列和中序遍历序列重建二叉树：rebuildBinaryTreeRec
  * 14.判断二叉树是不是完全二叉树：isCompleteBinaryTree, isCompleteBinaryTreeRec
- *
  */
 public class BinaryTreeSummary {
 
@@ -115,9 +116,8 @@ public class BinaryTreeSummary {
 //		}
 
 //		System.out.println(getNodeNumKthLevelRec(r1, 2));
-//		System.out.println(getNodeNumKthLevel(r1, 2));
-
-//		System.out.println(getNodeNumLeafRec(r1));
+//		System.out.println(getNodeNumKthLevel(r1, 3));
+        System.out.println(getNodeNumLeafRec(r1));
 //		System.out.println(getNodeNumLeaf(r1));
 
 //		System.out.println(isSame(r1, r1));
@@ -127,8 +127,31 @@ public class BinaryTreeSummary {
 //		TreeNode mirrorRoot = mirrorCopy(r1);
 //		inorderTraversal(mirrorRoot);
 
-        System.out.println(isCompleteBinaryTree(r1));
-        System.out.println(isCompleteBinaryTreeRec(r1));
+//        System.out.println(isCompleteBinaryTree(r1));
+//        System.out.println(isCompleteBinaryTreeRec(r1));
+
+    }
+
+
+    @Test
+    public void test1() {
+
+        TreeNode r1 = new TreeNode(1);
+        TreeNode r2 = new TreeNode(2);
+        TreeNode r3 = new TreeNode(3);
+        TreeNode r4 = new TreeNode(4);
+        TreeNode r5 = new TreeNode(5);
+        TreeNode r6 = new TreeNode(6);
+
+        r1.left = r2;
+        r1.right = r3;
+        r2.left = r4;
+        r2.right = r5;
+        r3.right = r6;
+
+//        TreeNode node =  convertBST2DLLRec(r1);
+        TreeNode node = convertBST2DLL(r1);
+        System.out.println(node);
 
     }
 
@@ -139,6 +162,15 @@ public class BinaryTreeSummary {
 
         public TreeNode(int val) {
             this.val = val;
+        }
+
+        @Override
+        public String toString() {
+            return "TreeNode{" +
+                    "val=" + val +
+//                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
         }
     }
 
@@ -164,7 +196,7 @@ public class BinaryTreeSummary {
             return 0;
         }
         int count = 1;
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
+        Queue<TreeNode> queue = new LinkedList<>();//频繁插入删除 linkList 效率高.
         queue.add(root);
 
         while (!queue.isEmpty()) {
@@ -180,6 +212,115 @@ public class BinaryTreeSummary {
         }
 
         return count;
+    }
+
+
+    /**
+     * 求二叉树中叶子节点的个数（递归）
+     */
+    public static int getNodeNumLeafRec(TreeNode root) {
+        // 当root不存在，返回空
+        if (root == null) {
+            return 0;
+        }
+
+        // 当为叶子节点时返回1
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+
+        // 把一个树拆成左子树和右子树之和，原理同上一题
+        return getNodeNumLeafRec(root.left) + getNodeNumLeafRec(root.right);
+    }
+
+    /**
+     * 求二叉树中叶子节点的个数（迭代）
+     * 还是基于Level order traversal
+     */
+    public static int getNodeNumLeaf(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int leafNodes = 0;                // 记录上一个Level，node的数量
+
+        while (!queue.isEmpty()) {
+            TreeNode cur = queue.remove();        // 从队头位置移除
+            if (cur.left != null) {                // 如果有左孩子，加到队尾
+                queue.add(cur.left);
+            }
+            if (cur.right != null) {                // 如果有右孩子，加到队尾
+                queue.add(cur.right);
+            }
+            if (cur.left == null && cur.right == null) {            // 叶子节点
+                leafNodes++;
+            }
+        }
+
+        return leafNodes;
+    }
+
+
+    /**
+     * 求二叉树第K层的节点个数   递归解法：
+     * （1）如果二叉树为空或者k<1返回0
+     * （2）如果二叉树不为空并且k==1，返回1
+     * （3）如果二叉树不为空且k>1，返回root左子树中k-1层的节点个数与root右子树k-1层节点个数之和
+     * <p>
+     * 求以root为根的k层节点数目 等价于 求以root左孩子为根的k-1层（因为少了root那一层）节点数目 加上
+     * 以root右孩子为根的k-1层（因为少了root那一层）节点数目
+     * <p>
+     * 所以遇到树，先把它拆成左子树和右子树，把问题降解
+     */
+    public static int getNodeNumKthLevelRec(TreeNode root, int k) {
+        if (root == null || k < 1) {
+            return 0;
+        }
+        if (k == 1) {
+            return 1;
+        }
+        int numLeft = getNodeNumKthLevelRec(root.left, k - 1);        // 求root左子树的k-1层节点数
+        int numRight = getNodeNumKthLevelRec(root.right, k - 1);    // 求root右子树的k-1层节点数
+        return numLeft + numRight;
+    }
+
+    /**
+     * 求二叉树第K层的节点个数   迭代解法：
+     * 同 getDepth 的迭代解法
+     */
+    public static int getNodeNumKthLevel(TreeNode root, int k) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        int i = 1;
+        int currentLevelNodes = 1;        // 当前Level，node的数量
+        int nextLevelNodes = 0;            // 下一层Level，node的数量
+
+        while (!queue.isEmpty() && i < k) {
+            TreeNode cur = queue.remove();        // 从队头位置移除
+            currentLevelNodes--;            // 减少当前Level node的数量
+            if (cur.left != null) {                // 如果有左孩子，加到队尾
+                queue.add(cur.left);
+                nextLevelNodes++;            // 并增加下一层Level node的数量
+            }
+            if (cur.right != null) {            // 如果有右孩子，加到队尾
+                queue.add(cur.right);
+                nextLevelNodes++;
+            }
+
+            if (currentLevelNodes == 0) { // 说明已经遍历完当前层的所有节点
+                currentLevelNodes = nextLevelNodes;        // 初始化下一层的遍历
+                nextLevelNodes = 0;
+                i++;            // 进入到下一层
+            }
+        }
+
+        return currentLevelNodes;
     }
 
     /**
@@ -210,7 +351,7 @@ public class BinaryTreeSummary {
         int currentLevelNodes = 1;        // 当前Level，node的数量
         int nextLevelNodes = 0;            // 下一层Level，node的数量
 
-        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.add(root);
 
         while (!queue.isEmpty()) {
@@ -224,14 +365,12 @@ public class BinaryTreeSummary {
                 queue.add(cur.right);
                 nextLevelNodes++;
             }
-
             if (currentLevelNodes == 0) { // 说明已经遍历完当前层的所有节点
                 depth++;                       // 增加高度
                 currentLevelNodes = nextLevelNodes;        // 初始化下一层的遍历
                 nextLevelNodes = 0;
             }
         }
-
         return depth;
     }
 
@@ -259,7 +398,7 @@ public class BinaryTreeSummary {
             return;
         }
 
-        Stack<TreeNode> stack = new Stack<TreeNode>();        // 辅助stack
+        Stack<TreeNode> stack = new Stack<>();        // 辅助stack
         stack.push(root);
 
         while (!stack.isEmpty()) {
@@ -295,6 +434,7 @@ public class BinaryTreeSummary {
      * 然后输出栈顶元素，再处理栈顶元素的右子树
      * http://www.youtube.com/watch?v=50v1sJkjxoc
      * <p>
+     * <p>
      * 还有一种方法能不用递归和栈，基于线索二叉树的方法，较麻烦以后补上
      * http://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/
      */
@@ -302,7 +442,7 @@ public class BinaryTreeSummary {
         if (root == null) {
             return;
         }
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack = new Stack<>();
         TreeNode cur = root;
 
         while (true) {
@@ -310,11 +450,9 @@ public class BinaryTreeSummary {
                 stack.push(cur);
                 cur = cur.left;
             }
-
             if (stack.isEmpty()) {
                 break;
             }
-
             // 因为此时已经没有左孩子了，所以输出栈顶元素
             cur = stack.pop();
             System.out.print(cur.val + " ");
@@ -345,11 +483,11 @@ public class BinaryTreeSummary {
             return;
         }
 
-        Stack<TreeNode> s = new Stack<TreeNode>();        // 第一个stack用于添加node和它的左右孩子
-        Stack<TreeNode> output = new Stack<TreeNode>();// 第二个stack用于翻转第一个stack输出
+        Stack<TreeNode> s = new Stack<>(); // 第一个stack用于添加node和它的左右孩子
+        Stack<TreeNode> output = new Stack<>();// 第二个stack用于翻转第一个stack输出
 
         s.push(root);
-        while (!s.isEmpty()) {        // 确保所有元素都被翻转转移到第二个stack
+        while (!s.isEmpty()) {        //确保所有元素都被翻转转移到第二个stack
             TreeNode cur = s.pop();    // 把栈顶元素添加到第二个stack
             output.push(cur);
 
@@ -375,7 +513,7 @@ public class BinaryTreeSummary {
         if (root == null) {
             return;
         }
-        LinkedList<TreeNode> queue = new LinkedList<TreeNode>();
+        LinkedList<TreeNode> queue = new LinkedList<>();
         queue.push(root);
 
         while (!queue.isEmpty()) {
@@ -400,21 +538,20 @@ public class BinaryTreeSummary {
      * http://discuss.leetcode.com/questions/49/binary-tree-level-order-traversal#answer-container-2543
      */
     public static void levelTraversalRec(TreeNode root) {
-        ArrayList<ArrayList<Integer>> ret = new ArrayList<ArrayList<Integer>>();
+        ArrayList<ArrayList<Integer>> ret = new ArrayList<>();
         dfs(root, 0, ret);
         System.out.println(ret);
     }
 
+    //deep first search
     private static void dfs(TreeNode root, int level, ArrayList<ArrayList<Integer>> ret) {
         if (root == null) {
             return;
         }
-
         // 添加一个新的ArrayList表示新的一层
         if (level >= ret.size()) {
             ret.add(new ArrayList<Integer>());
         }
-
         ret.get(level).add(root.val);    // 把节点添加到表示那一层的ArrayList里
         dfs(root.left, level + 1, ret);        // 递归处理下一层的左子树和右子树
         dfs(root.right, level + 1, ret);
@@ -505,113 +642,6 @@ public class BinaryTreeSummary {
         return head;
     }
 
-    /**
-     * 求二叉树第K层的节点个数   递归解法：
-     * （1）如果二叉树为空或者k<1返回0
-     * （2）如果二叉树不为空并且k==1，返回1
-     * （3）如果二叉树不为空且k>1，返回root左子树中k-1层的节点个数与root右子树k-1层节点个数之和
-     * <p>
-     * 求以root为根的k层节点数目 等价于 求以root左孩子为根的k-1层（因为少了root那一层）节点数目 加上
-     * 以root右孩子为根的k-1层（因为少了root那一层）节点数目
-     * <p>
-     * 所以遇到树，先把它拆成左子树和右子树，把问题降解
-     */
-    public static int getNodeNumKthLevelRec(TreeNode root, int k) {
-        if (root == null || k < 1) {
-            return 0;
-        }
-
-        if (k == 1) {
-            return 1;
-        }
-        int numLeft = getNodeNumKthLevelRec(root.left, k - 1);        // 求root左子树的k-1层节点数
-        int numRight = getNodeNumKthLevelRec(root.right, k - 1);    // 求root右子树的k-1层节点数
-        return numLeft + numRight;
-    }
-
-    /**
-     * 求二叉树第K层的节点个数   迭代解法：
-     * 同getDepth的迭代解法
-     */
-    public static int getNodeNumKthLevel(TreeNode root, int k) {
-        if (root == null) {
-            return 0;
-        }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-
-        int i = 1;
-        int currentLevelNodes = 1;        // 当前Level，node的数量
-        int nextLevelNodes = 0;            // 下一层Level，node的数量
-
-        while (!queue.isEmpty() && i < k) {
-            TreeNode cur = queue.remove();        // 从队头位置移除
-            currentLevelNodes--;            // 减少当前Level node的数量
-            if (cur.left != null) {                // 如果有左孩子，加到队尾
-                queue.add(cur.left);
-                nextLevelNodes++;            // 并增加下一层Level node的数量
-            }
-            if (cur.right != null) {            // 如果有右孩子，加到队尾
-                queue.add(cur.right);
-                nextLevelNodes++;
-            }
-
-            if (currentLevelNodes == 0) { // 说明已经遍历完当前层的所有节点
-                currentLevelNodes = nextLevelNodes;        // 初始化下一层的遍历
-                nextLevelNodes = 0;
-                i++;            // 进入到下一层
-            }
-        }
-
-        return currentLevelNodes;
-    }
-
-    /**
-     * 求二叉树中叶子节点的个数（递归）
-     */
-    public static int getNodeNumLeafRec(TreeNode root) {
-        // 当root不存在，返回空
-        if (root == null) {
-            return 0;
-        }
-
-        // 当为叶子节点时返回1
-        if (root.left == null && root.right == null) {
-            return 1;
-        }
-
-        // 把一个树拆成左子树和右子树之和，原理同上一题
-        return getNodeNumLeafRec(root.left) + getNodeNumLeafRec(root.right);
-    }
-
-    /**
-     * 求二叉树中叶子节点的个数（迭代）
-     * 还是基于Level order traversal
-     */
-    public static int getNodeNumLeaf(TreeNode root) {
-        if (root == null) {
-            return 0;
-        }
-        Queue<TreeNode> queue = new LinkedList<TreeNode>();
-        queue.add(root);
-
-        int leafNodes = 0;                // 记录上一个Level，node的数量
-
-        while (!queue.isEmpty()) {
-            TreeNode cur = queue.remove();        // 从队头位置移除
-            if (cur.left != null) {                // 如果有左孩子，加到队尾
-                queue.add(cur.left);
-            }
-            if (cur.right != null) {                // 如果有右孩子，加到队尾
-                queue.add(cur.right);
-            }
-            if (cur.left == null && cur.right == null) {            // 叶子节点
-                leafNodes++;
-            }
-        }
-
-        return leafNodes;
-    }
 
     /**
      * 判断两棵二叉树是否相同的树。
@@ -756,7 +786,7 @@ public class BinaryTreeSummary {
             return;
         }
 
-        Stack<TreeNode> stack = new Stack<TreeNode>();
+        Stack<TreeNode> stack = new Stack<>();
         stack.push(root);
         while (!stack.isEmpty()) {
             TreeNode cur = stack.pop();

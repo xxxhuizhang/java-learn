@@ -21,9 +21,18 @@ import com.baomidou.mybatisplus.enums.IdType;
  * MybatisPlus会默认使用实体类的类名到数据中找对应的表.
  *
  */
+//@TableName(value="tbl_employee")
 public class Employee extends Model<Employee> {
 
+    /*
+     * @TableId:
+     * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
+     *   type: 指定主键策略.
+     */
+    //@TableId(value="id" , type =IdType.AUTO)
     private Integer id;   //  int
+
+    @TableField(value = "last_name")
     private String lastName;
     private String email;
     private Integer gender;

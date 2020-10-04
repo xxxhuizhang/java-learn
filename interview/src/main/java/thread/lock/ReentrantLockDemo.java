@@ -24,7 +24,6 @@ public class ReentrantLockDemo {
 //        syncTest(phone);
 //        System.out.println();
 
-
         //ReentrantLock就是典型的可重入锁
         Thread t3 = new Thread(phone);
         Thread t4 = new Thread(phone);

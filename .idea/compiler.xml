@@ -6,8 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="dataStructure" />
+        <module name="algorithm" />
         <module name="design-pattern" />
+        <module name="juc-demo" />
         <module name="interview" />
         <module name="mybatis-mbg" />
         <module name="mybatis" />
@@ -16,13 +17,13 @@
         <module name="mp04" />
         <module name="mp03" />
         <module name="mp02" />
-        <module name="mp01" />
-        <module name="algorithm" />
-        <module name="juc-demo" />
+        <module name="dataStructure" />
+        <module name="java" />
         <module name="nio" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="mp01" target="1.8" />
       <module name="mybaits-MBG" target="1.8" />
       <module name="spring-annotation" target="1.8" />
     </bytecodeTargetLevel>
