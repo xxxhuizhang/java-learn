@@ -7,7 +7,9 @@ package com.atguigu.mybatis.bean;
  */
 public enum EmpStatus {
 
-    LOGIN(100, "用户登录"), LOGOUT(200, "用户登出"), REMOVE(300, "用户不存在");
+    LOGIN(100, "用户登录"),
+    LOGOUT(200, "用户登出"),
+    REMOVE(300, "用户不存在");
 
     private Integer code;
     private String msg;

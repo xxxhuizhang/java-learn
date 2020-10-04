@@ -1,52 +1,69 @@
 package com.atguigu.mp.beans;
 
+import com.baomidou.mybatisplus.annotations.*;
 import com.baomidou.mybatisplus.enums.IdType;
-import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.enums.IdType;
 import com.baomidou.mybatisplus.activerecord.Model;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.annotations.Version;
 
 import java.io.Serializable;
 
 /**
+ * javaBean
  * <p>
- * 
- * </p>
+ * 定义JavaBean中成员变量时所使用的类型:
+ * 因为每个基本类型都有一个默认值:
+ * int ==> 0
+ * boolean ==> false
  *
- * @author weiyunhui
- * @since 2018-06-21
+ * MybatisPlus会默认使用实体类的类名到数据中找对应的表.
+ *
  */
-@TableName("tbl_employee")
+//@TableName("tbl_employee")
 public class Employee extends Model<Employee> {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "id", type = IdType.AUTO)
+    /*
+     * @TableId:
+     * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
+     *   type: 指定主键策略.
+     */
+    //@TableId(value="id" , type =IdType.AUTO)
     private Integer id;
     private String lastName;
     private String email;
     private String gender;
     private Integer age;
-    
+
     @Version
-    private Integer version ;
-    
+    private Integer version;
 
-	public Integer getVersion() {
-		return version;
-	}
+    @TableField(exist = false)
+    private Double salary;
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    public Double getSalary() {
+        return salary;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public void setSalary(Double salary) {
+        this.salary = salary;
+    }
 
-	public Integer getId() {
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
+
+    public Integer getId() {
         return id;
     }
 
@@ -94,11 +111,11 @@ public class Employee extends Model<Employee> {
     @Override
     public String toString() {
         return "Employee{" +
-        ", id=" + id +
-        ", lastName=" + lastName +
-        ", email=" + email +
-        ", gender=" + gender +
-        ", age=" + age +
-        "}";
+                ", id=" + id +
+                ", lastName=" + lastName +
+                ", email=" + email +
+                ", gender=" + gender +
+                ", age=" + age +
+                "}";
     }
 }

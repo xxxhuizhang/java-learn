@@ -12,6 +12,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/mp01/pom.xml" />
         <option value="$PROJECT_DIR$/mybaits-MBG/pom.xml" />
         <option value="$PROJECT_DIR$/spring-annotation/pom.xml" />
       </set>
