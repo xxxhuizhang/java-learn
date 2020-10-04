@@ -10,16 +10,12 @@
     </properties>
 
     <groupId>org.example</groupId>
-    <artifactId>mybatsiplus</artifactId>
+    <artifactId>java-learn</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>mp01</module>
-        <module>mp02</module>
-        <module>mp03</module>
-        <module>mp04</module>
-        <module>mp05</module>
+        <module>mybatisplus</module>
         <module>mybatis</module>
         <module>mybatis-mbg</module>
         <module>spring</module>
@@ -33,38 +29,14 @@
     </modules>
 
     <dependencies>
-        <!-- mp依赖
-             mybatisPlus 会自动的维护Mybatis 以及MyBatis-spring相关的依赖
-         -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus</artifactId>
-            <version>2.3</version>
-        </dependency>
+
         <!--junit -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.9</version>
         </dependency>
-        <!-- log4j -->
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
-        <!-- c3p0 -->
-        <dependency>
-            <groupId>com.mchange</groupId>
-            <artifactId>c3p0</artifactId>
-            <version>0.9.5.2</version>
-        </dependency>
-        <!-- mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.37</version>
-        </dependency>
+
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
