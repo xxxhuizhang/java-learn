@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author weiyunhui
@@ -27,23 +27,23 @@ public class Employee extends Model<Employee> {
     private String email;
     private String gender;
     private Integer age;
-    
+
     @Version
-    private Integer version ;
+    private Integer version;
 
-	public Integer getVersion() {
-		return version;
-	}
+    public Integer getVersion() {
+        return version;
+    }
 
-	public void setVersion(Integer version) {
-		this.version = version;
-	}
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+    public static long getSerialversionuid() {
+        return serialVersionUID;
+    }
 
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -91,11 +91,11 @@ public class Employee extends Model<Employee> {
     @Override
     public String toString() {
         return "Employee{" +
-        ", id=" + id +
-        ", lastName=" + lastName +
-        ", email=" + email +
-        ", gender=" + gender +
-        ", age=" + age +
-        "}";
+                ", id=" + id +
+                ", lastName=" + lastName +
+                ", email=" + email +
+                ", gender=" + gender +
+                ", age=" + age +
+                "}";
     }
 }

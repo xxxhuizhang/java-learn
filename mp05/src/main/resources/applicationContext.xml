@@ -11,21 +11,21 @@
 
     <!-- 数据源 -->
     <context:property-placeholder location="classpath:db.properties"/>
-    <!-- Mysql
+    <!-- Mysql-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${jdbc.driver}"></property>
         <property name="jdbcUrl" value="${jdbc.url}"></property>
         <property name="user" value="${jdbc.username}"></property>
         <property name="password" value="${jdbc.password}"></property>
     </bean>
-     -->
-    <!-- Oracle -->
+
+    <!-- Oracle
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${orcl.driver}"></property>
         <property name="jdbcUrl" value="${orcl.url}"></property>
         <property name="user" value="${orcl.username}"></property>
         <property name="password" value="${orcl.password}"></property>
-    </bean>
+    </bean>-->
 
     <!-- 事务管理器 -->
     <bean id="dataSourceTransactionManager"

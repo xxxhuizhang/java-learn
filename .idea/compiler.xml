@@ -16,7 +16,6 @@
         <module name="mp05" />
         <module name="mp04" />
         <module name="mp03" />
-        <module name="mp02" />
         <module name="dataStructure" />
         <module name="java" />
         <module name="nio" />
@@ -24,6 +23,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="mp01" target="1.8" />
+      <module name="mp02" target="1.8" />
       <module name="mybaits-MBG" target="1.8" />
       <module name="spring-annotation" target="1.8" />
     </bytecodeTargetLevel>
