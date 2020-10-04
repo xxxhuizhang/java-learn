@@ -1,4 +1,4 @@
-package com.atguigu.mybatis;
+package com.atguigu.mybatis.test;
 
 //import com.atguigu.mybatis.bean.Employee;
 //import com.atguigu.mybatis.bean.EmployeeExample;
@@ -6,7 +6,6 @@ package com.atguigu.mybatis;
 //import com.atguigu.mybatis.dao.EmployeeMapper;
 
 import org.apache.ibatis.io.Resources;
-import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
@@ -22,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MyBatisTest {
+public class GenertorTest {
 
     public SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "mybatis-config.xml";

@@ -3,8 +3,6 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
-
     <!--
         1、mybatis可以使用properties来引入外部properties配置文件的内容；
         resource：引入类路径下的资源
@@ -148,6 +146,4 @@
         <!-- 批量注册： -->
         <package name="com.atguigu.mybatis.dao"/>
     </mappers>
-
-
 </configuration>

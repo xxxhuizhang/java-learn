@@ -22,18 +22,18 @@
         targetPackage="test.model"：目标包名
         targetProject="\MBGTestProject\src"：目标工程
         -->
-        <javaModelGenerator targetPackage="com.atguigu.mybatis.bean" targetProject="./src/main/java">
+        <javaModelGenerator targetPackage="mybatis.generator.test.bean" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
         <!-- sqlMapGenerator：sql映射生成策略： -->
-        <sqlMapGenerator targetPackage="com.atguigu.mybatis.dao" targetProject="./src/main/resources">
+        <sqlMapGenerator targetPackage="mybatis.generator.test.dao" targetProject="./src/main/resources">
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>
 
         <!-- javaClientGenerator:指定mapper接口所在的位置 -->
-        <javaClientGenerator type="XMLMAPPER" targetPackage="com.atguigu.mybatis.dao" targetProject="./src/main/java">
+        <javaClientGenerator type="XMLMAPPER" targetPackage="mybatis.generator.test.dao" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
