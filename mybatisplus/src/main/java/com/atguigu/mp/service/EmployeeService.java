@@ -1,7 +1,8 @@
 package com.atguigu.mp.service;
 
 import com.atguigu.mp.beans.Employee;
-import com.baomidou.mybatisplus.service.IService;
+import com.baomidou.mybatisplus.extension.service.IService;
+
 
 /**
  * <p>

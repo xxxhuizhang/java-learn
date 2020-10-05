@@ -1,7 +1,7 @@
 package com.atguigu.mp.mapper;
 
 import com.atguigu.mp.beans.Employee;
-import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
 /**
  * <p>
@@ -13,5 +13,5 @@ import com.baomidou.mybatisplus.mapper.BaseMapper;
  */
 public interface EmployeeMapper extends BaseMapper<Employee> {
 	
-	int  deleteAll();
+	//int  deleteAll();
 }

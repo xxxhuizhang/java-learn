@@ -2,7 +2,7 @@ package com.atguigu.mp.test;
 
 import com.atguigu.mp.beans.Employee;
 import com.atguigu.mp.mapper.EmployeeMapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -65,11 +65,11 @@ public class TestMP03 {
 	public void testPage() {
 		
 		Page<Employee> page = new Page<>(2,2);
-		List<Employee > emps = employeeMapper.selectPage(page, null);
+		Page<Employee > emps = employeeMapper.selectPage(page, null);
 		System.out.println(emps);
 
 		//将查询的结果封装到page对象中
-		page.setRecords(emps);
+		//page.setRecords(emps);
 
 		System.out.println("===============获取分页相关的一些信息======================");
 		System.out.println("总条数:" +page.getTotal());

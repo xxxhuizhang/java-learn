@@ -2,8 +2,8 @@ package com.atguigu.mp.test;
 
 import com.atguigu.mp.beans.Employee;
 import com.atguigu.mp.mapper.EmployeeMapper;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -27,7 +27,7 @@ public class TestMP {
     public void testEntityWrapperDelete() {
 
         employeeMapper.delete(
-                new EntityWrapper<Employee>()
+                new QueryWrapper<Employee>()
                         .eq("last_name", "Tom")
                         .eq("age", 22)
         );
@@ -46,7 +46,7 @@ public class TestMP {
         employee.setGender(0);
 
         employeeMapper.update(employee,
-                new EntityWrapper<Employee>()
+                new QueryWrapper<Employee>()
                         .eq("last_name", "Tom")
                         .eq("age", 44)
         );
@@ -167,7 +167,7 @@ public class TestMP {
 //		System.out.println(emps);
 
         //5. 分页查询
-        List<Employee> emps = employeeMapper.selectPage(new Page<>(3, 2), null);
+        Page<Employee> emps = employeeMapper.selectPage(new Page<>(3, 2), null);
         System.out.println(emps);
     }
 
@@ -185,8 +185,8 @@ public class TestMP {
         employee.setGender(0);
         //employee.setAge(33);
 
-        //Integer result = employeeMapper.updateById(employee);
-        Integer result = employeeMapper.updateAllColumnById(employee);
+        Integer result = employeeMapper.updateById(employee);
+        //Integer result = employeeMapper.updateAllColumnById(employee); //3.x后,删除了UpdateAllColumnById方法
 
         System.out.println("result: " + result);
     }

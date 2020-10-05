@@ -1,11 +1,16 @@
 package com.atguigu.mp.beans;
 
-import com.baomidou.mybatisplus.annotations.KeySequence;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableLogic;
-import com.baomidou.mybatisplus.enums.FieldFill;
-import com.baomidou.mybatisplus.enums.IdType;
+//import com.baomidou.mybatisplus.annotations.KeySequence;
+//import com.baomidou.mybatisplus.annotations.TableField;
+//import com.baomidou.mybatisplus.annotations.TableId;
+//import com.baomidou.mybatisplus.annotations.TableLogic;
+//import com.baomidou.mybatisplus.enums.FieldFill;
+//import com.baomidou.mybatisplus.enums.IdType;
+
+
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 
 //@KeySequence(value="seq_user",clazz=Integer.class)
 public class User extends Parent {

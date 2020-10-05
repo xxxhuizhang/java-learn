@@ -1,8 +1,8 @@
 package com.atguigu.mp.test;
 
 import com.atguigu.mp.beans.Employee;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -22,7 +22,7 @@ public class TestActiveRecord {
         Employee employee = new Employee();
 
         Page<Employee> page = employee.selectPage(new Page<>(1, 1),
-                new EntityWrapper<Employee>().like("last_name", "老"));
+                new QueryWrapper<Employee>().like("last_name", "老"));
         List<Employee> emps = page.getRecords();
         System.out.println(emps);
     }
@@ -42,7 +42,7 @@ public class TestActiveRecord {
 //		boolean result = employee.deleteById();
 //		System.out.println("result:" +result );
 
-        boolean result = employee.delete(new EntityWrapper<Employee>().like("last_name", "小"));
+        boolean result = employee.delete(new QueryWrapper<Employee>().like("last_name", "小"));
         System.out.println(result);
     }
 

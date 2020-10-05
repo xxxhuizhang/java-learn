@@ -12,8 +12,8 @@
     <!--
         2、settings包含很多重要的设置项
         setting:用来设置每一个设置项
-            name：设置项名
-            value：设置项取值
+        name：设置项名
+        value：设置项取值
      -->
     <settings>
         <setting name="mapUnderscoreToCamelCase" value="true"/>
