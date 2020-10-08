@@ -14,6 +14,7 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 
 //@KeySequence(value="seq_user",clazz=Integer.class)
 public class User extends Parent {
+
     //@TableId(type=IdType.INPUT)
     private Integer id;
 

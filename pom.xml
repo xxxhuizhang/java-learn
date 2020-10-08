@@ -26,6 +26,7 @@
         <module>juc-demo</module>
         <module>nio</module>
         <module>java</module>
+        <module>test</module>
     </modules>
 
     <dependencies>

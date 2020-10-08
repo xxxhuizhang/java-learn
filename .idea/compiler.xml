@@ -26,6 +26,7 @@
       <module name="mybaits-MBG" target="1.8" />
       <module name="mybatis-mbg" target="1.8" />
       <module name="spring-annotation" target="1.8" />
+      <module name="test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
