@@ -76,8 +76,7 @@
     <bean id="globalConfiguration" class="com.baomidou.mybatisplus.core.config.GlobalConfig">
         <property name="dbConfig" ref="dbConfig"/>
         <!--注入自定义全局操作-->
-        <property name="sqlInjector" ref="mySqlInjector"></property>
-
+<!--        <property name="sqlInjector" ref="mySqlInjector"></property>-->
         <!-- 注入公共字段填充处理器 -->
         <property name="metaObjectHandler" ref="myMetaObjectHandler"></property>
 
