@@ -1,10 +1,10 @@
 package com.atguigu.mp.beans;
 
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.Version;
+import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * javaBean
@@ -13,9 +13,8 @@ import java.io.Serializable;
  * 因为每个基本类型都有一个默认值:
  * int ==> 0
  * boolean ==> false
- *
+ * <p>
  * MybatisPlus会默认使用实体类的类名到数据中找对应的表.
- *
  */
 //@TableName("tbl_employee")
 public class Employee extends Model<Employee> {
@@ -27,8 +26,8 @@ public class Employee extends Model<Employee> {
      * 	 value: 指定表中的主键列的列名， 如果实体属性名与列名一致，可以省略不指定.
      *   type: 指定主键策略.
      */
-    //@TableId(value="id" , type =IdType.AUTO)
-    private Integer id;
+    //@TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     private String lastName;
     private String email;
     private Integer gender;
@@ -37,14 +36,29 @@ public class Employee extends Model<Employee> {
     @Version
     private Integer version;
 
+    @TableLogic
+    private Integer deleteFlag;
+
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
     @TableField(exist = false)
     private Double salary;
 
-    public Integer getId() {
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
+
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -80,6 +94,22 @@ public class Employee extends Model<Employee> {
         this.age = age;
     }
 
+    public LocalDateTime getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(LocalDateTime createTime) {
+        this.createTime = createTime;
+    }
+
+    public LocalDateTime getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(LocalDateTime updateTime) {
+        this.updateTime = updateTime;
+    }
+
     public Integer getVersion() {
         return version;
     }
@@ -96,19 +126,26 @@ public class Employee extends Model<Employee> {
         this.salary = salary;
     }
 
-    @Override
-    protected Serializable pkVal() {
-        return this.id;
+    public Integer getDeleteFlag() {
+        return deleteFlag;
+    }
+
+    public void setDeleteFlag(Integer deleteFlag) {
+        this.deleteFlag = deleteFlag;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                ", id=" + id +
-                ", lastName=" + lastName +
-                ", email=" + email +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 ", gender=" + gender +
                 ", age=" + age +
-                "}";
+                ", createTime=" + createTime +
+                ", updateTime=" + updateTime +
+                ", version=" + version +
+                ", salary=" + salary +
+                '}';
     }
 }

@@ -78,7 +78,7 @@ public class TestActiveRecord {
     @Test
     public void testARUpdate() {
         Employee employee = new Employee();
-        employee.setId(20);
+        employee.setId(20L);
         employee.setLastName("宋老湿");
         employee.setEmail("sls@atguigu.com");
         employee.setGender(1);
