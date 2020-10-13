@@ -14,6 +14,9 @@
  Date: 13/10/2020 21:43:27
 */
 
+DROP database IF EXISTS `mp`;
+create database mp;
+
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
