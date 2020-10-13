@@ -17,7 +17,6 @@
     <modules>
         <module>mybatisplus</module>
         <module>mybatis</module>
-        <module>mybatis-mbg</module>
         <module>spring</module>
         <module>algorithm</module>
         <module>dataStructure</module>
@@ -26,7 +25,6 @@
         <module>juc-demo</module>
         <module>nio</module>
         <module>java</module>
-        <module>test</module>
     </modules>
 
     <dependencies>
