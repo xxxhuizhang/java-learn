@@ -45,9 +45,10 @@ public class Department implements Serializable { //为缓存实现Serializable
 
     @Override
     public String toString() {
-        return "Department [id=" + id + ", departmentName=" + departmentName
-                + "]";
+        return "Department{" +
+                "id=" + id +
+                ", departmentName='" + departmentName + '\'' +
+                ", emps=" + emps +
+                '}';
     }
-
-
 }

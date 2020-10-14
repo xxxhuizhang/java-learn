@@ -92,6 +92,7 @@ public class Employee implements Serializable { //为缓存实现Serializable
         this.gender = gender;
     }
 
+
     @Override
     public String toString() {
         return "Employee{" +
@@ -99,6 +100,7 @@ public class Employee implements Serializable { //为缓存实现Serializable
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", gender='" + gender + '\'' +
+                ", dept=" + dept +
                 ", empStatus=" + empStatus +
                 '}';
     }
