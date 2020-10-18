@@ -21,7 +21,6 @@ import java.util.UUID;
 
 public class PageHelperTest {
 
-
     public SqlSessionFactory getSqlSessionFactory() throws IOException {
         String resource = "mybatis-config.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
@@ -34,9 +33,11 @@ public class PageHelperTest {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         // 2、获取sqlSession对象
         SqlSession openSession = sqlSessionFactory.openSession();
+
         try {
             EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-            Page<Object> page = PageHelper.startPage(1, 5);
+
+            Page<Object> page = PageHelper.startPage(1, 3);
             List<Employee> emps = mapper.getAllEmployees();
             for (Employee employee : emps) {
                 System.out.println(employee);
@@ -65,7 +66,6 @@ public class PageHelperTest {
         } finally {
             openSession.close();
         }
-
     }
 
     @Test
@@ -94,58 +94,28 @@ public class PageHelperTest {
 
     /**
      * oracle分页：
-     * 		借助rownum：行号；子查询；
+     * 借助rownum：行号；子查询；
      * 存储过程包装分页逻辑
+     *
      * @throws IOException
      */
-   @Test
-    public void testProcedure() throws IOException{
+    @Test
+    public void testProcedure() throws IOException {
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
         SqlSession openSession = sqlSessionFactory.openSession();
-        try{
+        try {
             EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
             OraclePage page = new OraclePage();
             page.setStart(1);
             page.setEnd(5);
             mapper.getPageByProcedure(page);
 
-            System.out.println("总记录数："+page.getCount());
-            System.out.println("查出的数据："+page.getEmps().size());
-            System.out.println("查出的数据："+page.getEmps());
-        }finally{
+            System.out.println("总记录数：" + page.getCount());
+            System.out.println("查出的数据：" + page.getEmps().size());
+            System.out.println("查出的数据：" + page.getEmps());
+        } finally {
             openSession.close();
         }
     }
 
-    @Test
-    public void testEnumUse(){
-        EmpStatus login = EmpStatus.LOGIN;
-        System.out.println("枚举的索引："+login.ordinal());
-        System.out.println("枚举的名字："+login.name());
-
-        System.out.println("枚举的状态码："+login.getCode());
-        System.out.println("枚举的提示消息："+login.getMsg());
-    }
-
-    /**
-     * 默认mybatis在处理枚举对象的时候保存的是枚举的名字：EnumTypeHandler
-     * 改变使用：EnumOrdinalTypeHandler：
-     * @throws IOException
-     */
-    @Test
-    public void testEnum() throws IOException{
-        SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-        SqlSession openSession = sqlSessionFactory.openSession();
-        try{
-            EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
-//			Employee employee = new Employee("test_enum", "enum@atguigu.com","1");
-//			mapper.addEmp(employee);
-//			System.out.println("保存成功"+employee.getId());
-//			openSession.commit();
-            Employee empById = mapper.getEmpById(20);
-            System.out.println(empById);
-        }finally{
-            openSession.close();
-        }
-    }
 }

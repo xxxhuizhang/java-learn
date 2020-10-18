@@ -16,6 +16,8 @@
 
 DROP database IF EXISTS `mp`;
 create database mp;
+use mp;
+
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
