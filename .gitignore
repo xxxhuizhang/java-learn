@@ -11,6 +11,8 @@
 target
 /out
 
+*generator/test
+
 
 
 
