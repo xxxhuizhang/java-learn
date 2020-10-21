@@ -7,9 +7,15 @@
 #Log file
 *.log
 .idea
-.gitignore
 
 target
 /out
+
+*generator
+
+
+
+
+
 
 
