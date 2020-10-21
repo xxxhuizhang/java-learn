@@ -115,10 +115,12 @@ public class MyBatisCacheTest {
             EmployeeMapper mapper = openSession.getMapper(EmployeeMapper.class);
             EmployeeMapper mapper2 = openSession2.getMapper(EmployeeMapper.class);
 
+            //Cache Hit Ratio [com.atguigu.mybatis.dao.EmployeeMapper]: 0.0  (LoggingCache.java:62)
             Employee emp01 = mapper.getEmpById(1);
             System.out.println(emp01);
             openSession.close();//缓存默认放在一级缓存,会话关闭会才会保存到二级缓存中
 
+            //Cache Hit Ratio [com.atguigu.mybatis.dao.EmployeeMapper]: 0.5  (LoggingCache.java:62)
             //第二次查询是从二级缓存中拿到的数据，并没有发送新的sql
             //mapper2.addEmp(new Employee(null, "aaa", "nnn", "0"));
             Employee emp02 = mapper2.getEmpById(1);

@@ -66,11 +66,10 @@ public class EmployeeMapperTest {
         // sql的唯一标识：statement Unique identifier matching the statement to use.
         // 执行sql要用的参数：parameter A parameter object to pass to the statement.
         SqlSessionFactory sqlSessionFactory = getSqlSessionFactory();
-
         SqlSession openSession = sqlSessionFactory.openSession();
+
         try {
-            Employee employee = openSession.selectOne(
-                    "com.atguigu.mybatis.dao.EmployeeMapper.getEmpById", 1);
+            Employee employee = openSession.selectOne("com.atguigu.mybatis.dao.EmployeeMapper.getEmpById", 1);
             System.out.println(employee);
         } finally {
             openSession.close();
@@ -126,7 +125,6 @@ public class EmployeeMapperTest {
 //            System.out.println(updateEmp);
             //测试删除
             //mapper.deleteEmpById(2);
-
 
             //2、手动提交数据
             openSession.commit();
@@ -184,9 +182,6 @@ public class EmployeeMapperTest {
         System.out.println("枚举的状态码：" + login.getCode());
         System.out.println("枚举的提示消息：" + login.getMsg());
     }
-
-
-
 
 
 }
