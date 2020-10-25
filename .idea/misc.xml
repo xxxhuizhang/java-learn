@@ -12,6 +12,7 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/juc-demo/pom.xml" />
         <option value="$PROJECT_DIR$/mp01/pom.xml" />
         <option value="$PROJECT_DIR$/mp02/pom.xml" />
         <option value="$PROJECT_DIR$/mp03/pom.xml" />
