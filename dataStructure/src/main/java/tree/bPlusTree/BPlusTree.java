@@ -1,10 +1,9 @@
 package tree.bPlusTree;
 
 /**
- * 
 
- https://blog.csdn.net/hitits/article/details/90293142
- B+树是一种多路平衡查找树,是对B树(B-Tree)的扩展.
+https://blog.csdn.net/hitits/article/details/90293142
+B+树是一种多路平衡查找树,是对B树(B-Tree)的扩展.
 是一个n叉排序树，每个节点通常有多个孩子，一棵B+树包含根节点、内部节点和叶子节点。根节点可能是一个叶子节点，也可能是一个包含两个或两个以上孩子节点的节点。
 B+ 树通常用于数据库和操作系统的文件系统中。NTFS, ReiserFS, NSS, XFS, JFS, ReFS 和BFS等文件系统都在使用B+树作为元数据索引。B+ 树的特点是能够保持数据稳定有序，其插入与修改拥有较稳定的对数时间复杂度。B+ 树元素自底向上插入。
 B+树是B-树的一种变体，性能比B-树更好。
