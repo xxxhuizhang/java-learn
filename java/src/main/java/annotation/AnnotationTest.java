@@ -65,6 +65,7 @@ import java.util.Date;
 public class AnnotationTest {
 
     public static void main(String[] args) {
+
         Person p = new Student();
         p.walk();
 
@@ -101,11 +102,13 @@ class Person{
 
     public Person() {
     }
+
     @MyAnnotation
     public Person(String name, int age) {
         this.name = name;
         this.age = age;
     }
+
     @MyAnnotation
     public void walk(){
         System.out.println("人走路");

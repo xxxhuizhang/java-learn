@@ -5,8 +5,8 @@ public class ViolenceMatch {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//测试暴力匹配算法
-		String str1 = "硅硅谷 尚硅谷你尚硅 尚硅谷你尚硅谷你尚硅你好";
-		String str2 = "尚硅谷你尚硅你~";
+		String str1 = "我是一个中国人我的爱好是写代码";
+		String str2 = "中国人我的爱好";
 		int index = violenceMatch(str1, str2);
 		System.out.println("index=" + index);
 	}

@@ -7,13 +7,14 @@ import java.util.Properties;
 
 /**
  * 了解类的加载器
+ *
  * @author shkstart
  * @create 2019 下午 2:16
  */
 public class ClassLoaderTest {
 
     @Test
-    public void test1(){
+    public void test1() {
         //对于自定义类，使用系统类加载器进行加载
         ClassLoader classLoader = ClassLoaderTest.class.getClassLoader();
         System.out.println(classLoader);
@@ -29,6 +30,7 @@ public class ClassLoaderTest {
         System.out.println(classLoader3);
 
     }
+
     /*
     Properties：用来读取配置文件。
 
@@ -36,7 +38,7 @@ public class ClassLoaderTest {
     @Test
     public void test2() throws Exception {
 
-        Properties pros =  new Properties();
+        Properties pros = new Properties();
         //此时的文件默认在当前的module下。
         //读取配置文件的方式一：
 //        FileInputStream fis = new FileInputStream("jdbc.properties");
@@ -53,8 +55,6 @@ public class ClassLoaderTest {
         String user = pros.getProperty("user");
         String password = pros.getProperty("password");
         System.out.println("user = " + user + ",password = " + password);
-
-
 
     }
 
