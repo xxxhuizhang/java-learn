@@ -1,21 +1,72 @@
 package IO.java;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
 
 public class UnzipFile {
 
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private String zipFileSuffix = ".zip";
+    private String baseFolder = "/Users/apple/Desktop/lems-zip/";
+    private List zipDirList = Arrays.asList("SSE", "SZSE", "NEEQ"); //上交所（SSE）、深交所(SZSE)、股转(NEEQ)
+
 
     public static void main(String[] args) {
 
-        File file = new File("/Users/apple/Desktop/lems-zip/zip/123.zip");
-        String unzipPathstr = "/Users/apple/Desktop/lems-zip/unzip/";
-        ZipInputStream zipInputStream = null;
+        UnzipFile unzipFile = new UnzipFile();
+        unzipFile.unzipFile();
+    }
 
+
+    public void unzipFile() {
+
+        String currentDateFolder = new SimpleDateFormat("yyyyMMdd").format(new Date());
+
+        String zipPath = String.format("%szip/%s/", baseFolder, currentDateFolder);
+        String unzipPath = String.format("%sunzip/%s/", baseFolder, currentDateFolder);
+
+        recusiveFindFile(zipPath, unzipPath);
+    }
+
+    private void recusiveFindFile(String zipPath, String unzipPath) {
+
+        File zipPathFile = new File(zipPath);
+
+        if (!zipPathFile.exists()) {
+            logger.error("没有 {} 文件夹", zipPath);
+        }
+
+        for (File file : zipPathFile.listFiles()) {
+            String fileName = file.getName();
+            if (file.isDirectory()) {
+                recusiveFindFile(zipPath + fileName + "/", unzipPath + fileName + "/");
+            } else if (fileName.endsWith(zipFileSuffix)) {
+                unzipFile(zipPath + fileName, unzipPath);
+            } else {
+                logger.info("other file : {}", fileName);
+            }
+        }
+    }
+
+
+    public void unzipFile(String zipPath, String unzipPath) {
+
+        File file = new File(zipPath);
+
+        ZipInputStream zipInputStream = null;
         OutputStream os = null;
         InputStream in = null;
+
 
         try {
             ZipFile zipFile = new ZipFile(file);
@@ -25,19 +76,19 @@ public class UnzipFile {
 
                 if (entry.isDirectory()) {
                     System.out.println("Dir : " + entry.getName());
-                    File dir = new File(unzipPathstr + entry.getName());
+                    File dir = new File(unzipPath + entry.getName());
                     if (!dir.exists()) {
-                        dir.mkdir();
+                        dir.mkdirs();
                         continue;
                     }
                 }
 
                 File tmp = new File(entry.getName());
                 if (tmp.isHidden()) {
-                    System.out.println("tempFiel : " + entry.getName());
+                    System.out.println("hidden : " + entry.getName());
                 }
 
-                File destFile = new File(unzipPathstr + entry.getName());
+                File destFile = new File(unzipPath + entry.getName());
                 if (!destFile.exists()) {
 
                     os = new FileOutputStream(destFile);
@@ -78,7 +129,6 @@ public class UnzipFile {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
