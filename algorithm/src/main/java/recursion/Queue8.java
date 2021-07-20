@@ -18,14 +18,14 @@ public class Queue8 {
 
     public static void main(String[] args) {
         Queue8 queue8 = new Queue8();
-        queue8.check(0);
+        queue8.setQueen(0);
         System.out.printf("一共有%d解法", count);
         System.out.printf("一共判断冲突的次数%d次", judgeCount); // 1.5w
     }
 
     // 编写一个方法，放置第n个皇后
     // 特别注意： check 是 每一次递归时，进入到check中都有 for(int i = 0; i < max; i++)，因此会有回溯
-    private void check(int n) {
+    private void setQueen(int n) {
         if (n == max) { // n = 8 , 其实8个皇后已然放好
             print();
             return;
@@ -35,9 +35,9 @@ public class Queue8 {
             // 先把当前这个皇后 n , 放到该行的第1列
             array[n] = i;
             // 判断当放置第n个皇后到i列时，是否冲突
-            if (judge(n)) { // 不冲突
+            if (check(n)) { // 不冲突
                 // 接着放n+1个皇后,即开始递归
-                check(n + 1); //
+                setQueen(n + 1); //
             }
             // 如果冲突，就继续执行 array[n] = i; 即将第n个皇后，放置在本行得 后移的一个位置
         }
@@ -49,7 +49,7 @@ public class Queue8 {
      * @param n 表示第n个皇后
      * @return
      */
-    private boolean judge(int n) {
+    private boolean check(int n) {
         judgeCount++;
         for (int i = 0; i < n; i++) {
             // 说明
