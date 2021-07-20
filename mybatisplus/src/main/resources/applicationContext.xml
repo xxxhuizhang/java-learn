@@ -95,9 +95,9 @@
     </bean>
 
     <!-- 定义自定义注入器 -->
-    <bean id="mySqlInjector" class="com.atguigu.mp.injector.DeleteALLSqlInjector"></bean>
+    <bean id="mySqlInjector" class="com.cbhlife.mp.injector.DeleteALLSqlInjector"></bean>
     <!-- 公共字段填充 处理器 -->
-    <bean id="myMetaObjectHandler" class="com.atguigu.mp.metaObjectHandler.MyMetaObjectHandler"></bean>
+    <bean id="myMetaObjectHandler" class="com.cbhlife.mp.metaObjectHandler.MyMetaObjectHandler"></bean>
     <!-- 配置Oracle主键Sequence -->
     <!--<bean id="oracleKeyGenerator" class="com.baomidou.mybatisplus.extension.incrementer.OracleKeyGenerator"></bean>-->
 
