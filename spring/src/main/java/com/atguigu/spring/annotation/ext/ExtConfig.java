@@ -67,10 +67,10 @@ import com.atguigu.spring.annotation.bean.Blue;
  *  			1）、获取事件的多播器（派发器）：getApplicationEventMulticaster()
  *  			2）、multicastEvent派发事件：
  *  			3）、获取到所有的ApplicationListener；
- *  				for (final ApplicationListener<?> listener : getApplicationListeners(event, type)) {
+ *  				for (final ApplicationListener<?> com.cbhlife.activiti.listener : getApplicationListeners(event, type)) {
  *  				1）、如果有Executor，可以支持使用Executor进行异步派发；
  *  					Executor executor = getTaskExecutor();
- *  				2）、否则，同步的方式直接执行listener方法；invokeListener(listener, event);
+ *  				2）、否则，同步的方式直接执行listener方法；invokeListener(com.cbhlife.activiti.listener, event);
  *  				 拿到listener回调onApplicationEvent方法；
  *  
  *  【事件多播器（派发器）】

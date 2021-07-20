@@ -23,6 +23,7 @@
         <module>design-pattern</module>
         <module>interview</module>
         <module>java</module>
+        <module>activiti</module>
     </modules>
 
     <dependencies>
