@@ -127,7 +127,7 @@ class Graph {
             System.out.println();
             // 输出dis数组的一行数据
             for (int i = 0; i < dis.length; i++) {
-                System.out.print("(" + vertex[k] + "到" + vertex[i] + "的最短路径是" + dis[k][i] + ") ");
+                System.out.print("(" + vertex[k] + "->" + vertex[i] + ":" + dis[k][i] + ") ");
             }
             System.out.println();
             System.out.println();
