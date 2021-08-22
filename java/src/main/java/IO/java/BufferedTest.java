@@ -5,6 +5,10 @@ import org.junit.Test;
 import java.io.*;
 
 /**
+ *
+ *  https://blog.csdn.net/zhaoyanjun6/article/details/54292148
+ *
+ *
  * 处理流之一：缓冲流的使用
  *
  * 1.缓冲流：

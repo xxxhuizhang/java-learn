@@ -1,6 +1,7 @@
 package com.cbhlife.activiti;
 
-import com.itheima.demo.pojo.Evection;
+
+import com.cbhlife.activiti.pojo.Evection;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
