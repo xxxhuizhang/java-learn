@@ -122,7 +122,7 @@ class Graph {
         vv = new VisitedVertex(vertex.length, index);
         update(index);//更新index顶点到周围顶点的距离和前驱顶点
         for (int j = 1; j < vertex.length; j++) {
-            index = vv.updateArr();// 选择并返回新的访问顶点
+            index = vv.updateAlreadyArr();// 选择并返回新的访问顶点
             update(index); // 更新index顶点到周围顶点的距离和前驱顶点
         }
     }
@@ -136,7 +136,7 @@ class Graph {
             // len 含义是 : 出发顶点到index顶点的距离 + 从index顶点到j顶点的距离的和
             len = vv.getDis(index) + matrix[index][j];
             // 如果j顶点没有被访问过，并且 len 小于出发顶点到j顶点的距离，就需要更新
-            if (!vv.in(j) && len < vv.getDis(j)) {
+            if (!vv.inAlreadyArr(j) && len < vv.getDis(j)) {
                 vv.updatePre(j, index); //更新j顶点的前驱为index顶点
                 vv.updateDis(j, len); //更新出发顶点到j顶点的距离
             }
@@ -175,7 +175,7 @@ class VisitedVertex {
      * @param index
      * @return 如果访问过，就返回true, 否则访问false
      */
-    public boolean in(int index) {
+    public boolean inAlreadyArr(int index) {
         return already_arr[index] == 1;
     }
 
@@ -214,7 +214,7 @@ class VisitedVertex {
      *
      * @return
      */
-    public int updateArr() {
+    public int updateAlreadyArr() {
         int min = 65535, index = 0;
         for (int i = 0; i < already_arr.length; i++) {
             if (already_arr[i] == 0 && dis[i] < min) {
