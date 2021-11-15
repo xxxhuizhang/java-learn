@@ -5,12 +5,12 @@
     <endEvent id="_3" name="EndEvent"/>
     <userTask activiti:exclusive="true" id="_4" name="创建申请">
       <extensionElements>
-        <activiti:taskListener class="com.itheima.demo.com.cbhlife.activiti.listener.MyTaskListener" event="all"/>
+        <activiti:taskListener class="com.cbhlife.activiti.listener.MyTaskListener" event="all"/>
       </extensionElements>
     </userTask>
     <userTask activiti:exclusive="true" id="_5" name="审核申请">
       <extensionElements>
-        <activiti:taskListener class="com.itheima.demo.com.cbhlife.activiti.listener.MyTaskListener" event="all"/>
+        <activiti:taskListener class="com.cbhlife.activiti.listener.MyTaskListener" event="all"/>
       </extensionElements>
     </userTask>
     <sequenceFlow id="_6" sourceRef="_2" targetRef="_4"/>
