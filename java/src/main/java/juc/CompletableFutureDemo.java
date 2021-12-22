@@ -22,6 +22,8 @@ public class CompletableFutureDemo {
             return 1024;
         });
 
+//        Integer integer = future2.get();
+
         future2.whenComplete(
                 (t, u) -> {
                     System.out.println("*****t=" + t);
