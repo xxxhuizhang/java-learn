@@ -265,51 +265,5 @@ class Node {
         }
     }
 
-    /**
-     * 反转二叉树 (翻转, 镜像)
-     *
-     * @param node
-     * @return
-     */
-    public Node invertTree(Node node) {
-        if (node == null) {
-            return null;
-        }
-        invertTree(node.left);
-        invertTree(node.right);
-
-        Node temp = node.left;
-        node.left = node.right;
-        node.right = temp;
-        return node;
-    }
-
-    /**
-     * 非递归 反转,镜像
-     *
-     * @param node
-     */
-    public void invertNotRecursive(Node node) {
-        LinkedList<Node> stack = new LinkedList<>();
-        Node temp = null;
-        if (node == null) {
-            return;
-        }
-        stack.add(node);
-
-        while (stack.size() != 0) {
-            Node topNode = stack.removeFirst();
-            temp = topNode.left;
-            topNode.left = topNode.right;
-            topNode.right = temp;
-            if (topNode.right != null) {
-                stack.add(topNode.right);
-            }
-            if (node.left != null) {
-                stack.add(topNode.left);
-            }
-        }
-    }
-
 
 }
