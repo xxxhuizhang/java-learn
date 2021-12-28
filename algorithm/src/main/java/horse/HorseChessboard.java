@@ -106,7 +106,7 @@ public class HorseChessboard {
 	 */
 	public static ArrayList<Point> next(Point curPoint) {
 		// 创建一个ArrayList
-		ArrayList<Point> ps = new ArrayList<Point>();
+		ArrayList<Point> ps = new ArrayList<>();
 		// 创建一个Point
 		Point p1 = new Point();
 		// 表示马儿可以走5这个位置
