@@ -15,7 +15,6 @@ import java.io.*;
  * 3. 解码：字节、字节数组  --->字符数组、字符串
  * 编码：字符数组、字符串 ---> 字节、字节数组
  * <p>
- * <p>
  * 4.字符集
  * ASCII：美国标准信息交换码。
  * 用一个字节的7位可以表示。
@@ -26,7 +25,7 @@ import java.io.*;
  * Unicode：国际标准码，融合了目前人类使用的所有字符。为每个字符分配唯一的字符码。所有的文字都用两个字节来表示。
  * UTF-8：变长的编码方式，可用1-4个字节来表示一个字符。
  *
- * @author shkstart
+ * 
  * @create 2019 下午 4:25
  */
 public class InputStreamReaderTest {
@@ -49,7 +48,6 @@ public class InputStreamReaderTest {
             String str = new String(cbuf, 0, len);
             System.out.print(str);
         }
-
         isr.close();
 
     }
@@ -77,12 +75,9 @@ public class InputStreamReaderTest {
         while ((len = isr.read(cbuf)) != -1) {
             osw.write(cbuf, 0, len);
         }
-
         //3.关闭资源
         isr.close();
         osw.close();
-
-
     }
 
 

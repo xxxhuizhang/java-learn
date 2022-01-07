@@ -3,7 +3,7 @@ package reflection.java1;
 import java.util.Date;
 
 /**
- * @author shkstart
+ * 
  * @create 2019 下午 3:12
  */
 @MyAnnotation(value = "hi")

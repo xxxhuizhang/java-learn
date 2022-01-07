@@ -11,7 +11,7 @@ import java.util.List;
  *
  *
  *
- * @author shkstart
+ * 
  * @create 2019 上午 11:09
  */
 public class GenericTest1 {

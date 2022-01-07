@@ -1,7 +1,7 @@
 package java8.java4;
 
 /**
- * @author shkstart
+ * 
  * @create 2019 下午 7:23
  */
 public class Girl {

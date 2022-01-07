@@ -1,7 +1,7 @@
 package string.java;
 
 /**
- * @author shkstart
+ * 
  * @create 2019 上午 11:01
  */
 public class Person {

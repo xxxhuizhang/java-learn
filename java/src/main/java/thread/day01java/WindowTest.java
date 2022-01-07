@@ -6,7 +6,7 @@ package thread.day01java;
  *
  * 存在线程的安全问题，待解决。
  *
- * @author shkstart
+ *
  * @create 2019-02-13 下午 4:20
  */
 class Window extends Thread{

@@ -4,7 +4,7 @@ package com.atguigu.java;
  * 使用enum关键字定义枚举类
  * 说明：定义的枚举类默认继承于java.lang.Enum类
  *
- * @author shkstart
+ * 
  * @create 2019 上午 10:35
  */
 public class SeasonTest1 {

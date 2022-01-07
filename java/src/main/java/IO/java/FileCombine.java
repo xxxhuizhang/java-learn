@@ -1,25 +1,26 @@
 package IO.java;
 
+import org.junit.Test;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class FileCombine {
 
-    public static void main(String[] args) {
-
+    @Test
+    public void fileCombine() {
+        String s = fileCombine("./file/io/");
     }
-
 
     public String fileCombine(String filePath) {
 
-        String destFile = filePath + "/all.txt";
+        String destFile = filePath + "/combine.txt";
         BufferedWriter bw = null;
         BufferedReader br = null;
-        String extension = ".csv";
+        String extension = ".txt";
 
         try {
-
-//            BufferedWriter bw = new BufferedWriter(new FileWriter(destFile));
+//            bw = new BufferedWriter(new FileWriter(destFile));
             bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destFile), StandardCharsets.UTF_8));
             File[] list = new File(filePath).listFiles();
 
@@ -35,7 +36,6 @@ public class FileCombine {
                     br.close();
                 }
             }
-            bw.close();
 
         } catch (Exception e) {
             e.printStackTrace();
