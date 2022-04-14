@@ -1,5 +1,6 @@
 package com.cbhlife.mp.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cbhlife.mp.beans.Employee;
 import com.cbhlife.mp.mapper.EmployeeMapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -30,6 +31,13 @@ public class TestMP01 {
                         .eq("last_name", "Tom")
                         .eq("age", 22)
         );
+
+        employeeMapper.delete(
+                new LambdaQueryWrapper<Employee>()
+                        .eq(Employee::getLastName, "Tom")
+                        .eq(Employee::getAge, 22)
+        );
+        
     }
 
 
