@@ -1,5 +1,13 @@
 
 
+docker images;
+docker ps
+docker ps -a ;
+docker stats;
+
+docker update mysql --restart=always
+docker exec -it postgres /bin/bash
+
 
 #compose
 docker-compose -f docker-env-mac.yml up -d postgres
