@@ -1,0 +1,284 @@
+
+docker update mysql --restart=always
+
+
+//--------------------nginx------------------------
+
+docker run --name nginx -p 80:80 \
+-v /Users/imessage/Desktop/docker/config/nginx/conf:/etc/nginx \
+-v /Users/imessage/Desktop/docker/config/nginx/logs:/var/log/nginx \
+-v /Users/imessage/Desktop/docker/config/nginx/html:/usr/share/nginx/html \
+--link php72:php72 \
+-d nginx:latest
+
+
+//--------------------mysql------------------------
+
+docker run -p 3306:3306 --name mysql3306 \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3306/log:/var/log/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3306/data:/var/lib/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3306/conf:/etc/mysql/conf.d/ \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:5.7
+
+docker run -p 3307:3306 --name mysql3307 \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3307/log:/var/log/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3307/data:/var/lib/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3307/conf:/etc/mysql/conf.d/ \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:5.7
+
+docker run -p 3308:3306 --name mysql3308 \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3308/log:/var/log/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3308/data:/var/lib/mysql \
+-v /Users/imessage/Desktop/docker/config/mysql/mysql3308/conf:/etc/mysql/conf.d/ \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:8
+
+
+docker run -p 3308:3306 --name mysql3308 \
+-e MYSQL_ROOT_PASSWORD=root \
+-d mysql:8
+
+
+#导出数据
+docker exec -it mysql mysqldump --all-databases  --hex-blob  -uroot -proot  > /var/log/mysql/mysql_back.sql ;
+docker exec -it mysql3306 mysqldump --all-databases  --hex-blob  -uroot -proot  > /var/log/mysql/mysql_back.sql ;
+
+docker exec -it mysql3306 mysqldump -uroot -proot --ignore-table=test.t1 --ignore-table=test.t2 > /backup/mysqldump/test2.db
+
+docker exec -it mysql3306 mysqldump -uroot -proot --hex-blob  --databases \
+gulimall_admin gulimall_oms gulimall_pms gulimall_sms gulimall_ums gulimall_wms mp mybatis nacos_config > /var/log/mysql/gulimall_all.sql;
+
+
+
+#'caching_sha2_password' cannot be loaded
+解决方法: https://www.jianshu.com/p/939eb5157e83
+
+
+查看当前加密方式：
+use mysql;
+select user,plugin from user where user='root';
+alter user 'root'@'localhost' identified with mysql_native_password by 'password';
+
+
+
+修改加密方式：
+alter user 'root'@'localhost' identified with mysql_native_password by 'root';
+alter user 'root'@'%' identified with mysql_native_password by 'root';
+flush privileges; #生效
+
+
+CREATE USER 'repl3306'@'192.168.1.103' IDENTIFIED BY 'repl3306';
+GRANT REPLICATION SLAVE ON *.* TO 'repl3306'@'192.168.1.103';
+SHOW MASTER STATUS;
+CHANGE MASTER TO MASTER_HOST='192.168.1.103', MASTER_USER='repl3306',  MASTER_PASSWORD='repl3306', MASTER_LOG_FILE='mysql3306bin.000001',MASTER_LOG_POS=472629; 
+start slave ,stop slave; SHOW slave STATUS;
+
+start slave ;
+stop slave;
+SHOW slave STATUS;
+
+mysql 加表锁 :
+lock table xxxtbl read;  #加读锁  
+lock table xxxtbl write; #加写锁
+unlock tables; 
+
+set autocommit = 0;
+update xx
+commit;
+
+
+
+
+//--------------------redis------------------------
+
+docker run -p 6379:6379 --name redis6379 \
+-v /Users/imessage/Desktop/docker/config/redis/redis6379/data:/data \
+-v /Users/imessage/Desktop/docker/config/redis/redis6379/conf/redis.conf:/etc/redis/redis.conf \
+-d redis redis-server /etc/redis/redis.conf
+
+docker run -p 6380:6379 --name redis6380 \
+-v /Users/imessage/Desktop/docker/config/redis/redis6380/data:/data \
+-v /Users/imessage/Desktop/docker/config/redis/redis6380/conf/redis.conf:/etc/redis/redis.conf \
+-d redis redis-server /etc/redis/redis.conf
+
+docker run -p 6381:6379 --name redis6381 \
+-v /Users/imessage/Desktop/docker/config/redis/redis6381/data:/data \
+-v /Users/imessage/Desktop/docker/config/redis/redis6381/conf/redis.conf:/etc/redis/redis.conf \
+-d redis redis-server /etc/redis/redis.conf
+
+
+
+//--------------------elasticsearch------------------------
+
+docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
+-e "discovery.type=single-node" \
+-e ES_JAVA_OPTS="-Xms128m -Xmx512m" \
+-v /Users/imessage/Desktop/docker/config/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+-v /Users/imessage/Desktop/docker/config/elasticsearch/data:/usr/share/elasticsearch/data \
+-v /Users/imessage/Desktop/docker/config/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+-d elasticsearch:7.4.2
+
+
+//--------------------kibana------------------------
+
+docker run --name kibana -p 5601:5601 \
+-e ELASTICSEARCH_HOSTS=http://192.168.1.103:9200/ \
+--link elasticsearch:elasticsearch \
+-d kibana:7.4.2
+
+docker run --name kibana -p 5601:5601 \
+-e ELASTICSEARCH_HOSTS=http://elasticsearch:9200/ \
+--link elasticsearch:elasticsearch \
+-d kibana:7.4.2
+
+
+
+
+//--------------------rabbitMQ------------------------
+
+docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 -p 4369:4369 -p 25672:25672 -p 15671:15671 -p 15672:15672 rabbitmq:management
+
+
+
+//集群
+
+docker run -d --hostname rabbitmq01 --name rabbitmq01  \
+-p 5673:5672  -p 15673:15672 \
+-v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq01:/var/lib/rabbitmq \
+-e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
+
+docker run -d --hostname rabbitmq02 --name rabbitmq02  \
+-p 5674:5672  -p 15674:15672 \
+-v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq02:/var/lib/rabbitmq \
+--link rabbitmq01:rabbitmq01 \
+-e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
+
+docker run -d --hostname rabbitmq03 --name rabbitmq03  \
+-p 5675:5672  -p 15675:15672 \
+-v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq03:/var/lib/rabbitmq \
+--link rabbitmq01:rabbitmq01 --link rabbitmq02:rabbitmq02 \
+-e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
+
+
+rabbitmqctl set_policy -p / ha "^" '{"ha-mode":"all","ha-sync-mode":"automatic"}'
+rabbitmqctl  list_policies -p /;
+
+
+docker exec -it rabbitmq01 /bin/bash
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl start_app
+
+docker exec -it rabbitmq02 /bin/bash
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster --ram rabbit@rabbitmq01
+rabbitmqctl start_app
+
+docker exec -it rabbitmq03 /bin/bash
+rabbitmqctl stop_app
+rabbitmqctl reset
+rabbitmqctl join_cluster --ram rabbit@rabbitmq01
+rabbitmqctl start_app
+
+
+
+//--------------------rabbitMQ------------------------
+
+
+
+
+
+//--------------------zipkin------------------------
+
+docker run --name zipkin -d -p 9411:9411 openzipkin/zipkin
+
+docker run --name zipkinES --env STORAGE_TYPE=elasticsearch \
+--evn ES_HOSTS=192.168.56.10:9200 -d -p 9411:9411 \
+openzipkin/zipkin-dependencies
+
+
+//--------------------zipkin------------------------
+
+
+//--------------------php72------------------------
+
+#https://stackoverflow.com/questions/29905953/how-to-correctly-link-php-fpm-and-nginx-docker-containers
+
+docker run --name php72 \
+-v /Users/imessage/Desktop/docker/config/php:/usr/local/etc/php \
+-v /Users/imessage/Desktop/docker/config/nginx/html:/www \
+--link mysql3306:mysql3306 \
+-d php:7.2-fpm  
+
+php -m
+php -ini
+
+pecl instll xdeug
+
+docker-php-ext-install pdo_mysql
+apt update  #更新软件源
+apt install -y libwebp-dev libjpeg-dev libpng-dev libfreetype6-dev #安装各种库
+docker-php-ext-install gd
+docker-php-ext-install mysqli
+
+
+apt update  #更新软件源
+apt install -y libwebp-dev libjpeg-dev libpng-dev libfreetype6-dev #安装各种库
+
+docker-php-ext-install pdo_mysql
+docker-php-ext-install mysqli
+docker-php-ext-install gd
+pecl install xdebug
+
+[xdebug]
+zend_extension="/usr/local/lib/php/extensions/no-debug-non-zts-20170718/xdebug.so"
+
+;xdebug.auto_trace=on
+;xdebug.collect_params=on
+;xdebug.collect_return=on　　
+;xdebug.profiler_enable=on
+;xdebug.remote_host=192.168.0.1 
+;xdebug.remote_connect_back=off
+;xdebug.remote_handler = dbgp
+xdebug.remote_enable=1
+xdebug.remote_autostart=1
+xdebug.remote_host=host.docker.internal
+xdebug.remote_port=9085
+xdebug.idekey=PHPSTORM
+xdebug.profiler_output_dir = "/www/php/xdebug"
+
+
+
+//--------------------php72------------------------
+
+
+//--------------------elastic-head------------------------
+docker build -f Dockerfile .
+
+//--------------------elastic-head------------------------
+
+
+
+//--------------------docker network------------------------
+
+docker network create --driver bridge --subnet=172.18.12.0/16 --gateway=172.18.1.1 mynet
+
+//--------------------docker network------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
