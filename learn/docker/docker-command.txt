@@ -1,0 +1,9 @@
+
+
+
+#compose
+docker-compose -f docker-env-mac.yml up -d postgres
+
+
+
+
