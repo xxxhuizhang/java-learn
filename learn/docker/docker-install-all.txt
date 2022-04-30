@@ -1,5 +1,23 @@
 
 docker update mysql --restart=always
+docker run --name postgres -e POSTGRES_PASSWORD=root -d postgres
+
+
+//--------------------postgres------------------------
+
+docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=root \
+-v /Users/apple/Desktop/docker/postgresql/data:/var/lib/postgresql/data \
+-d postgres:latest
+
+pg_config --version
+su - postgres
+createdb  mydb
+
+docker exec -it postgres psql -U  postgres
+
+//--------------------postgres------------------------
+
+
 
 
 //--------------------nginx------------------------
