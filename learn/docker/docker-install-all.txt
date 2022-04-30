@@ -5,8 +5,9 @@ docker run --name postgres -e POSTGRES_PASSWORD=root -d postgres
 
 //--------------------postgres------------------------
 
-docker run --name postgres -p 5432:5432 -e POSTGRES_PASSWORD=root \
--v /Users/apple/Desktop/docker/postgresql/data:/var/lib/postgresql/data \
+docker run --name postgres -p 5432:5432 \
+-e POSTGRES_DB=cbhlife POSTGRES_USER=root POSTGRES_PASSWORD=root \
+-v /~/Desktop/docker/postgresql/data:/var/lib/postgresql/data \
 -d postgres:latest
 
 pg_config --version
@@ -23,9 +24,9 @@ docker exec -it postgres psql -U  postgres
 //--------------------nginx------------------------
 
 docker run --name nginx -p 80:80 \
--v /Users/imessage/Desktop/docker/config/nginx/conf:/etc/nginx \
--v /Users/imessage/Desktop/docker/config/nginx/logs:/var/log/nginx \
--v /Users/imessage/Desktop/docker/config/nginx/html:/usr/share/nginx/html \
+-v ~/Desktop/docker/config/nginx/conf:/etc/nginx \
+-v ~/Desktop/docker/config/nginx/logs:/var/log/nginx \
+-v ~/Desktop/docker/config/nginx/html:/usr/share/nginx/html \
 --link php72:php72 \
 -d nginx:latest
 
@@ -33,23 +34,23 @@ docker run --name nginx -p 80:80 \
 //--------------------mysql------------------------
 
 docker run -p 3306:3306 --name mysql3306 \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3306/log:/var/log/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3306/data:/var/lib/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3306/conf:/etc/mysql/conf.d/ \
+-v ~/Desktop/docker/config/mysql/mysql3306/log:/var/log/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3306/data:/var/lib/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3306/conf:/etc/mysql/conf.d/ \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
 
 docker run -p 3307:3306 --name mysql3307 \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3307/log:/var/log/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3307/data:/var/lib/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3307/conf:/etc/mysql/conf.d/ \
+-v ~/Desktop/docker/config/mysql/mysql3307/log:/var/log/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3307/data:/var/lib/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3307/conf:/etc/mysql/conf.d/ \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:5.7
 
 docker run -p 3308:3306 --name mysql3308 \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3308/log:/var/log/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3308/data:/var/lib/mysql \
--v /Users/imessage/Desktop/docker/config/mysql/mysql3308/conf:/etc/mysql/conf.d/ \
+-v ~/Desktop/docker/config/mysql/mysql3308/log:/var/log/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3308/data:/var/lib/mysql \
+-v ~/Desktop/docker/config/mysql/mysql3308/conf:/etc/mysql/conf.d/ \
 -e MYSQL_ROOT_PASSWORD=root \
 -d mysql:8
 
@@ -62,68 +63,32 @@ docker run -p 3308:3306 --name mysql3308 \
 #导出数据
 docker exec -it mysql mysqldump --all-databases  --hex-blob  -uroot -proot  > /var/log/mysql/mysql_back.sql ;
 docker exec -it mysql3306 mysqldump --all-databases  --hex-blob  -uroot -proot  > /var/log/mysql/mysql_back.sql ;
-
 docker exec -it mysql3306 mysqldump -uroot -proot --ignore-table=test.t1 --ignore-table=test.t2 > /backup/mysqldump/test2.db
 
 docker exec -it mysql3306 mysqldump -uroot -proot --hex-blob  --databases \
 gulimall_admin gulimall_oms gulimall_pms gulimall_sms gulimall_ums gulimall_wms mp mybatis nacos_config > /var/log/mysql/gulimall_all.sql;
 
 
-
 #'caching_sha2_password' cannot be loaded
 解决方法: https://www.jianshu.com/p/939eb5157e83
-
-
-查看当前加密方式：
-use mysql;
-select user,plugin from user where user='root';
-alter user 'root'@'localhost' identified with mysql_native_password by 'password';
-
-
-
-修改加密方式：
-alter user 'root'@'localhost' identified with mysql_native_password by 'root';
-alter user 'root'@'%' identified with mysql_native_password by 'root';
-flush privileges; #生效
-
-
-CREATE USER 'repl3306'@'192.168.1.103' IDENTIFIED BY 'repl3306';
-GRANT REPLICATION SLAVE ON *.* TO 'repl3306'@'192.168.1.103';
-SHOW MASTER STATUS;
-CHANGE MASTER TO MASTER_HOST='192.168.1.103', MASTER_USER='repl3306',  MASTER_PASSWORD='repl3306', MASTER_LOG_FILE='mysql3306bin.000001',MASTER_LOG_POS=472629; 
-start slave ,stop slave; SHOW slave STATUS;
-
-start slave ;
-stop slave;
-SHOW slave STATUS;
-
-mysql 加表锁 :
-lock table xxxtbl read;  #加读锁  
-lock table xxxtbl write; #加写锁
-unlock tables; 
-
-set autocommit = 0;
-update xx
-commit;
-
 
 
 
 //--------------------redis------------------------
 
 docker run -p 6379:6379 --name redis6379 \
--v /Users/imessage/Desktop/docker/config/redis/redis6379/data:/data \
--v /Users/imessage/Desktop/docker/config/redis/redis6379/conf/redis.conf:/etc/redis/redis.conf \
+-v ~/Desktop/docker/config/redis/redis6379/data:/data \
+-v ~/Desktop/docker/config/redis/redis6379/conf/redis.conf:/etc/redis/redis.conf \
 -d redis redis-server /etc/redis/redis.conf
 
 docker run -p 6380:6379 --name redis6380 \
--v /Users/imessage/Desktop/docker/config/redis/redis6380/data:/data \
--v /Users/imessage/Desktop/docker/config/redis/redis6380/conf/redis.conf:/etc/redis/redis.conf \
+-v ~/Desktop/docker/config/redis/redis6380/data:/data \
+-v ~/Desktop/docker/config/redis/redis6380/conf/redis.conf:/etc/redis/redis.conf \
 -d redis redis-server /etc/redis/redis.conf
 
 docker run -p 6381:6379 --name redis6381 \
--v /Users/imessage/Desktop/docker/config/redis/redis6381/data:/data \
--v /Users/imessage/Desktop/docker/config/redis/redis6381/conf/redis.conf:/etc/redis/redis.conf \
+-v ~/Desktop/docker/config/redis/redis6381/data:/data \
+-v ~/Desktop/docker/config/redis/redis6381/conf/redis.conf:/etc/redis/redis.conf \
 -d redis redis-server /etc/redis/redis.conf
 
 
@@ -133,9 +98,9 @@ docker run -p 6381:6379 --name redis6381 \
 docker run --name elasticsearch -p 9200:9200  -p 9300:9300 \
 -e "discovery.type=single-node" \
 -e ES_JAVA_OPTS="-Xms128m -Xmx512m" \
--v /Users/imessage/Desktop/docker/config/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
--v /Users/imessage/Desktop/docker/config/elasticsearch/data:/usr/share/elasticsearch/data \
--v /Users/imessage/Desktop/docker/config/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
+-v ~/Desktop/docker/config/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \
+-v ~/Desktop/docker/config/elasticsearch/data:/usr/share/elasticsearch/data \
+-v ~/Desktop/docker/config/elasticsearch/plugins:/usr/share/elasticsearch/plugins \
 -d elasticsearch:7.4.2
 
 
@@ -164,18 +129,18 @@ docker run -d --name rabbitmq -p 5671:5671 -p 5672:5672 -p 4369:4369 -p 25672:25
 
 docker run -d --hostname rabbitmq01 --name rabbitmq01  \
 -p 5673:5672  -p 15673:15672 \
--v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq01:/var/lib/rabbitmq \
+-v ~/Desktop/docker/config/rabbitmq/rabbitmq01:/var/lib/rabbitmq \
 -e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
 
 docker run -d --hostname rabbitmq02 --name rabbitmq02  \
 -p 5674:5672  -p 15674:15672 \
--v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq02:/var/lib/rabbitmq \
+-v ~/Desktop/docker/config/rabbitmq/rabbitmq02:/var/lib/rabbitmq \
 --link rabbitmq01:rabbitmq01 \
 -e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
 
 docker run -d --hostname rabbitmq03 --name rabbitmq03  \
 -p 5675:5672  -p 15675:15672 \
--v /Users/imessage/Desktop/docker/config/rabbitmq/rabbitmq03:/var/lib/rabbitmq \
+-v ~/Desktop/docker/config/rabbitmq/rabbitmq03:/var/lib/rabbitmq \
 --link rabbitmq01:rabbitmq01 --link rabbitmq02:rabbitmq02 \
 -e RABBITMQ_ERLANG_COOKIE='myrabbitcookie' rabbitmq:management
 
@@ -226,8 +191,8 @@ openzipkin/zipkin-dependencies
 #https://stackoverflow.com/questions/29905953/how-to-correctly-link-php-fpm-and-nginx-docker-containers
 
 docker run --name php72 \
--v /Users/imessage/Desktop/docker/config/php:/usr/local/etc/php \
--v /Users/imessage/Desktop/docker/config/nginx/html:/www \
+-v ~/Desktop/docker/config/php:/usr/local/etc/php \
+-v ~/Desktop/docker/config/nginx/html:/www \
 --link mysql3306:mysql3306 \
 -d php:7.2-fpm  
 
@@ -267,8 +232,6 @@ xdebug.remote_host=host.docker.internal
 xdebug.remote_port=9085
 xdebug.idekey=PHPSTORM
 xdebug.profiler_output_dir = "/www/php/xdebug"
-
-
 
 //--------------------php72------------------------
 
