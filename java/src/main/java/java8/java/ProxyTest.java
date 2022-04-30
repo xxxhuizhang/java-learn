@@ -7,7 +7,7 @@ import java.lang.reflect.Proxy;
 /**
  * 动态代理的举例
  *
- * @author shkstart
+ * 
  * @create 2019 上午 10:18
  */
 

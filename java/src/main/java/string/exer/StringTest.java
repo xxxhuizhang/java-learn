@@ -2,7 +2,7 @@ package string.exer;
 
 /**
  * 一道面试题
- * @author shkstart
+ * 
  * @create 2019 上午 11:32
  */
 public class StringTest {

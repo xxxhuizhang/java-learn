@@ -4,6 +4,10 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -14,7 +18,6 @@ import java.util.Date;
  * 3. SimpleDateFormat
  * 4. Calendar
  *
- * @author shkstart
  * @create 2019 上午 11:35
  */
 public class DateTimeTest {
@@ -89,7 +92,7 @@ public class DateTimeTest {
 
      */
     @Test
-    public void testCalendar(){
+    public void testCalendar() {
         //1.实例化
         //方式一：创建其子类（GregorianCalendar）的对象
         //方式二：调用其静态方法getInstance()
@@ -104,12 +107,12 @@ public class DateTimeTest {
 
         //set()
         //calendar可变性
-        calendar.set(Calendar.DAY_OF_MONTH,22);
+        calendar.set(Calendar.DAY_OF_MONTH, 22);
         days = calendar.get(Calendar.DAY_OF_MONTH);
         System.out.println(days);
 
         //add()
-        calendar.add(Calendar.DAY_OF_MONTH,-3);
+        calendar.add(Calendar.DAY_OF_MONTH, -3);
         days = calendar.get(Calendar.DAY_OF_MONTH);
         System.out.println(days);
 
@@ -124,4 +127,42 @@ public class DateTimeTest {
         System.out.println(days);
 
     }
+
+
+    @Test
+    public void timestampToLocalDate() {
+
+         //This returns a LocalDate with the specified epoch-day.
+        // The EPOCH_DAY is a simple incrementing count of days where day 0 is 1970-01-01.
+        // Negative numbers represent earlier days.
+
+
+        LocalDate localDate = Instant.ofEpochMilli(1493959132000l).atZone(ZoneId.systemDefault()).toLocalDate();
+        System.out.println(localDate);
+
+        LocalDateTime localDateTime = Instant.ofEpochMilli(1493959132000l).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        System.out.println(localDateTime);
+
+        LocalDate localDate2 = LocalDate.ofEpochDay(1493959132000l/(1000 * 60 *60 * 24));
+        System.out.println(localDate);
+
+        LocalDate localDate1 = LocalDate.ofEpochDay(1); //1970-01-02
+
+    }
+
+
+    @Test
+    public void testTime() {
+
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date(1644508800000L);
+        String format = sdf1.format(date);
+
+
+        LocalDate localDate = LocalDate.ofEpochDay(1644508800000L);
+
+
+    }
+
+
 }

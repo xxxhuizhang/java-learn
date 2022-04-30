@@ -21,6 +21,7 @@ public class CompletableFutureDemo {
             int a = 10 / 0;
             return 1024;
         });
+    //Integer integer = future2.get();
 
         future2.whenComplete(
                 (t, u) -> {

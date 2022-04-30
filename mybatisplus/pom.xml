@@ -12,6 +12,11 @@
     <artifactId>mybatisplus</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.3.10.RELEASE</version>
+        </dependency>
 
         <!-- mp依赖  mybatisPlus 会自动的维护Mybatis 以及MyBatis-spring相关的依赖   -->
         <dependency>

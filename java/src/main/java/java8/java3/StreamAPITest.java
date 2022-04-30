@@ -31,7 +31,7 @@ import java.util.stream.Stream;
  *
  *  测试Stream的实例化
  *
- * @author shkstart
+ * 
  * @create 2019 下午 4:25
  */
 public class StreamAPITest {

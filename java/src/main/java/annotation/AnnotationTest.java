@@ -59,7 +59,7 @@ import java.util.Date;
      ElementType.TYPE_USE 表示该注解能写在使用类型的任何语句中。
 
       *
- * @author shkstart
+ *
  * @create 2019 上午 11:37
  */
 public class AnnotationTest {

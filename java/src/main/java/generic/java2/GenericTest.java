@@ -14,7 +14,7 @@ import java.util.List;
  *
  * 2. 通配符的使用
  *
- * @author shkstart
+ * 
  * @create 2019 下午 2:13
  */
 public class GenericTest {

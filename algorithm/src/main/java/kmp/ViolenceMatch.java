@@ -6,7 +6,7 @@ public class ViolenceMatch {
 		// TODO Auto-generated method stub
 		//测试暴力匹配算法
 		String str1 = "我是一个中国人我的爱好是写代码";
-		String str2 = "中国人我的爱好";
+		String str2 = "我是一个中国人";
 		int index = violenceMatch(str1, str2);
 		System.out.println("index=" + index);
 	}
@@ -31,7 +31,7 @@ public class ViolenceMatch {
 				j = 0;
 			}
 		}
-		
+
 		//判断是否匹配成功
 		if(j == s2Len) {
 			return i - j;
