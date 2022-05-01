@@ -6,8 +6,10 @@ docker run --name postgres -e POSTGRES_PASSWORD=root -d postgres
 //--------------------postgres------------------------
 
 docker run --name postgres -p 5432:5432 \
--e POSTGRES_DB=cbhlife POSTGRES_USER=root POSTGRES_PASSWORD=root \
--v /~/Desktop/docker/postgresql/data:/var/lib/postgresql/data \
+-e POSTGRES_DB=cbhlife \
+-e POSTGRES_USER=root \
+-e POSTGRES_PASSWORD=root \
+-v ~/Desktop/docker/postgresql/data:/var/lib/postgresql/data \
 -d postgres:latest
 
 pg_config --version
