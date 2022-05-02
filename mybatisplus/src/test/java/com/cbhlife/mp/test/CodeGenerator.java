@@ -72,7 +72,7 @@ public class CodeGenerator {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        //pc.setModuleName(scanner("请输入模块名"));
+        //pc.setModuleName(scanner("请输入子模块名"));
         pc.setParent("mybatis.plus.generator");
         autoGenerator.setPackageInfo(pc);
 
