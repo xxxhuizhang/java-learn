@@ -87,15 +87,19 @@ UPDATE accounts SET balance = balance + 100.00
 -- oops ... forget that and use Wally's account
 ROLLBACK TO my_savepoint;
 UPDATE accounts SET balance = balance + 100.00
- WHER
 
 
  -- Window Functions
 
-
  SELECT sum(salary) OVER w, avg(salary) OVER w
  FROM empsalary
  WINDOW w AS (PARTITION BY depname ORDER BY salary DESC);
+
+SELECT stuff,
+       count(*) OVER() AS total_count
+FROM table
+WHERE condition
+ORDER BY stuff OFFSET 40 LIMIT 20
 
  
 
