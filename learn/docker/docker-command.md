@@ -13,6 +13,10 @@ docker exec -it postgres /bin/bash
 #compose
 docker-compose -f docker-env-mac.yml up -d postgres
 
+ docker network ls
 
+# 删除报错的两个 product-server_default 即可：
+docker network rm d95512e66713 
+docker network rm 8b094834a5c1
 
 
