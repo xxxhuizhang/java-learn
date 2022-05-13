@@ -32,4 +32,9 @@ select  length(replace(gen_random_uuid()::varchar,'-',''));
 select  generate_series(1,10)
 
 
+select coalesce('1','2'); --postgresql
+--select nvl('1','2'); --Oracle
+--select ifnull('1','2'); --mysql
+
+
 
