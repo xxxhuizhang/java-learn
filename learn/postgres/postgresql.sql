@@ -1,6 +1,6 @@
 
 CREATE TABLE weather (
-   city varchar(80) references cities(name),
+    city varchar(80) references cities(name),
 	temp_lo int, -- low temperature
 	temp_hi int, -- high temperature
 	prcp real, -- precipitation
