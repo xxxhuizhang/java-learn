@@ -29,7 +29,7 @@ SELECT version();
 select  user;
 select  replace(gen_random_uuid()::varchar,'-','');
 select  length(replace(gen_random_uuid()::varchar,'-',''));
-select  generate_series(1,10)
+select  generate_series(1,10);
 
 
 select coalesce('1','2'); --postgresql
