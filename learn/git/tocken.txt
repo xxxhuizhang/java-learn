@@ -2,7 +2,7 @@
 右上角(头像) / Settings / Developer settings / Personal access tokens
 
 
-20220523  Expires on Sun, Aug 21 2022.
-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
+20220523  Expires on Tue, Aug 23 2022.
+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
 
 
