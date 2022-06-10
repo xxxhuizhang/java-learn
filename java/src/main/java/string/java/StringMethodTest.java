@@ -23,7 +23,7 @@ String[] split(String regex, int limit)：根据匹配给定的正则表达式�
      */
     @Test
     public void test4(){
-        String str1 = "北京尚硅谷教育北京";
+        String str1 = "北京市房山区良乡镇北京";
         String str2 = str1.replace('北', '东');
 
         System.out.println(str1);
@@ -138,7 +138,7 @@ String substring(int beginIndex, int endIndex) ：返回一个新字符串，它
         String s6 = new String("abe");
         System.out.println(s5.compareTo(s6));//涉及到字符串排序
 
-        String s7 = "北京尚硅谷教育";
+        String s7 = "北京市房山区良乡镇";
         String s8 = s7.substring(2);
         System.out.println(s7);
         System.out.println(s8);
