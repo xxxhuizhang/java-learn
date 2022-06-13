@@ -23,6 +23,9 @@ SELECT column_name FROM information_schema.columns WHERE table_name ='table_name
 select current_date;
 select current_time;
 select current_timestamp;
+select Date 'today';
+select Date 'tomorrow';
+
 
 SELECT version();
 
@@ -34,7 +37,15 @@ select  generate_series(1,10);
 
 select coalesce('1','2'); --postgresql
 --select nvl('1','2'); --Oracle
---select ifnull('1','2'); --mysql
+--select ifnullifnull('1','2'); --mysql
+
+select string_agg(distinct num,','order by num desc) from (
+  select generate_series(1,5)::varchar num
+) t_num;
+
+select array_to_string(array_agg(distinct num order by num desc), ',') from (
+select generate_series(1,5) num
+) t_num;
 
 
 select position('abd' in 'abcdab');
