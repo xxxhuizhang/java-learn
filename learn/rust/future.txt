@@ -1,0 +1,2 @@
+# future in rust
+https://www.viget.com/articles/understanding-futures-in-rust-part-1/

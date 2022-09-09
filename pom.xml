@@ -24,6 +24,7 @@
         <module>interview</module>
         <module>java</module>
         <module>activiti</module>
+        <module>httpclient5</module>
     </modules>
 
     <dependencies>
