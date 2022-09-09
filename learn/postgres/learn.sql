@@ -35,6 +35,9 @@ select  length(replace(gen_random_uuid()::varchar,'-',''));
 select  generate_series(1,10);
 
 
+select regexp_split_to_table('12,23,34,45,56,',',');
+
+
 select coalesce('1','2'); --postgresql
 --select nvl('1','2'); --Oracle
 --select ifnullifnull('1','2'); --mysql
