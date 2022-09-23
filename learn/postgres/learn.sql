@@ -36,6 +36,7 @@ select  generate_series(1,10);
 
 
 select regexp_split_to_table('12,23,34,45,56,66',',');
+select regexp_split_to_array('12,23,34,45,56,66',',');
 
 
 select coalesce('1','2'); --postgresql
