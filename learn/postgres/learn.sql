@@ -41,7 +41,7 @@ select regexp_split_to_array('12,23,34,45,56,66',',');
 
 select coalesce('1','2'); --postgresql
 --select nvl('1','2'); --Oracle
---select ifnullifnull('1','2'); --mysql
+--select ifnull('1','2'); --mysql
 
 select string_agg(distinct num,','order by num desc) from (
   select generate_series(1,5)::varchar num
