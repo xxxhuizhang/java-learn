@@ -25,6 +25,10 @@ select current_time;
 select current_timestamp;
 select Date 'today';
 select Date 'tomorrow';
+SELECT TO_DATE('20180301','yyyyMMdd') ;
+SELECT TO_DATE('2018#03#01','yyyy#MM#dd') ;
+SELECT TO_DATE('20180301','yyyyMMdd') - CAST('1' AS INT) * interval '1 month' ; -- day
+
 
 
 SELECT version();
@@ -38,9 +42,10 @@ select  generate_series(1,10);
 select regexp_split_to_table('12,23,34,45,56,66',',');
 select regexp_split_to_array('12,23,34,45,56,66',',');
 
+if('1','2','3'); -- 三元运算
 
 select coalesce('1','2'); --postgresql
---select nvl('1','2'); --Oracle
+--select nvl('1','2'); --Oracle postgresql
 --select ifnull('1','2'); --mysql
 
 select string_agg(distinct num,','order by num desc) from (
