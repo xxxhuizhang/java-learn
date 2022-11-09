@@ -71,7 +71,7 @@ public class TestChannel {
         CharsetDecoder cd = cs1.newDecoder();
 
         CharBuffer cBuf = CharBuffer.allocate(1024);
-        cBuf.put("尚硅谷威武！");
+        cBuf.put("盖世兔威武！");
         cBuf.flip();
 
         //编码
