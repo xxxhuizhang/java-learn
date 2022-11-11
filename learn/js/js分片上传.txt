@@ -1,0 +1,11 @@
+
+
+
+#axios POST提交数据的三种请求方式写法
+https://www.jianshu.com/p/c3b88438e92e
+
+#js实现文件切片上传，断点续传
+https://blog.csdn.net/qq_22896159/article/details/126268736
+
+#阿里云oss文件分片上传
+https://segmentfault.com/a/1190000020963346
