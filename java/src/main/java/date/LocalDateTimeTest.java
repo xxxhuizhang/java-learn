@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
@@ -26,6 +27,15 @@ public class LocalDateTimeTest {
 
         LocalDateTime localDateTime = LocalDateTime.ofInstant(parseDate.toInstant(), ZoneId.systemDefault());
         LocalDateTime UTCDataTime = LocalDateTime.ofInstant(parseDate.toInstant(), ZoneId.of("UTC"));
+    }
+
+
+    @Test
+    public void timeStampToLocalDatetime() throws ParseException {
+
+        Long timestamp = 1669201606797L;
+        Instant instant = Instant.ofEpochMilli(timestamp);
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneId.systemDefault());
     }
 
 

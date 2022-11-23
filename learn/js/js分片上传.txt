@@ -9,3 +9,6 @@ https://blog.csdn.net/qq_22896159/article/details/126268736
 
 #阿里云oss文件分片上传
 https://segmentfault.com/a/1190000020963346
+
+#解决大文件上传失败
+https://stackoverflow.com/questions/25810051/filereader-api-on-big-files
