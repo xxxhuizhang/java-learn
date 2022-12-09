@@ -70,7 +70,6 @@ public class UnzipFile {
         OutputStream os = null;
         InputStream in = null;
 
-
         try {
             ZipFile zipFile = new ZipFile(file);
             zipInputStream = new ZipInputStream(new FileInputStream(file));
@@ -93,15 +92,12 @@ public class UnzipFile {
 
                 File destFile = new File(unzipPath + entry.getName());
                 if (!destFile.exists()) {
-
                     os = new FileOutputStream(destFile);
-                    //in = zipFile.getInputStream(entry);
                     in = new BufferedInputStream(zipFile.getInputStream(entry));
-                    int count = 0;
+                    int len = 0;
                     byte[] bytes = new byte[1024];
-                    while ((count = in.read()) != -1) {
-                        //os.write(bytes, 0, count);
-                        os.write(bytes);
+                    while ((len = in.read(bytes)) != -1) {
+                        os.write(bytes, 0, len);
                     }
                 }
                 System.out.println(entry.getName() + "解压成功");
