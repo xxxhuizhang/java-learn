@@ -40,6 +40,7 @@ public class ZipTest {
                     zipOutputStream.write(bytes, 0, len);
                 }
                 inputStream.close();
+
             }
 
         } catch (Exception e) {
@@ -47,6 +48,12 @@ public class ZipTest {
         }
 
     }
+
+
+
+
+
+
 
 
 }

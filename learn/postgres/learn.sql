@@ -38,6 +38,8 @@ SELECT to_char(current_timestamp,'yyyy-MM-dd hh:MM:ss');
 SELECT to_char(123,'00');
 SELECT to_char(123,'9999999');
 SELECT to_number('123');
+SELECT FLOOR(1000 + random() * 100);
+
 
 SELECT version();
 
