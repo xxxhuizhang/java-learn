@@ -16,7 +16,7 @@ public class TestCandidate {
      * 流程部署
      */
     @Test
-    public void testDeployment(){
+    public void testDeployment() {
 //        1、创建ProcessEngine
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        2、获取RepositoryServcie
@@ -27,15 +27,15 @@ public class TestCandidate {
                 .addClasspathResource("bpmn/evection-candidate.bpmn")
                 .deploy();
 //        4、输出部署信息
-        System.out.println("流程部署id="+deploy.getId());
-        System.out.println("流程部署名字="+deploy.getName());
+        System.out.println("流程部署id=" + deploy.getId());
+        System.out.println("流程部署名字=" + deploy.getName());
     }
 
     /**
      * 启动流程 的时候设置流程变量
      */
     @Test
-    public void testStartProcess(){
+    public void testStartProcess() {
 //        获取流程引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        获取RunTimeService
@@ -50,7 +50,7 @@ public class TestCandidate {
      * 查询组任务
      */
     @Test
-    public void findGroupTaskList(){
+    public void findGroupTaskList() {
         //        流程定义的Key
         String key = "testCandidate";
 //        任务候选人
@@ -66,9 +66,9 @@ public class TestCandidate {
                 .list();
         for (Task task : taskList) {
             System.out.println("========================");
-            System.out.println("流程实例ID="+task.getProcessInstanceId());
-            System.out.println("任务id="+task.getId());
-            System.out.println("任务负责人="+task.getAssignee());
+            System.out.println("流程实例ID=" + task.getProcessInstanceId());
+            System.out.println("任务id=" + task.getId());
+            System.out.println("任务负责人=" + task.getAssignee());
         }
     }
 
@@ -76,7 +76,7 @@ public class TestCandidate {
      * 候选人拾取任务
      */
     @Test
-    public void claimTask(){
+    public void claimTask() {
 //        获取引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        获取TaskService
@@ -90,10 +90,10 @@ public class TestCandidate {
                 .taskId(taskId)
                 .taskCandidateUser(candidateUser)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
 //            拾取任务
-            taskService.claim(taskId,candidateUser);
-            System.out.println("taskid-"+taskId+"-用户-"+candidateUser+"-拾取任务完成");
+            taskService.claim(taskId, candidateUser);
+            System.out.println("taskid-" + taskId + "-用户-" + candidateUser + "-拾取任务完成");
         }
     }
 
@@ -101,7 +101,7 @@ public class TestCandidate {
      * 任务的归还
      */
     @Test
-    public void testAssigneeToGroupTask(){
+    public void testAssigneeToGroupTask() {
 //        获取引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        获取TaskService
@@ -115,10 +115,10 @@ public class TestCandidate {
                 .taskId(taskId)
                 .taskAssignee(assignee)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
 //            归还任务 ,就是把负责人 设置为空
-            taskService.setAssignee(taskId,null);
-            System.out.println("taskid-"+taskId+"-归还任务完成");
+            taskService.setAssignee(taskId, null);
+            System.out.println("taskid-" + taskId + "-归还任务完成");
         }
     }
 
@@ -127,7 +127,7 @@ public class TestCandidate {
      * 任务的交接
      */
     @Test
-    public void testAssigneeToCandidateUser(){
+    public void testAssigneeToCandidateUser() {
 //        获取引擎
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
 //        获取TaskService
@@ -143,17 +143,18 @@ public class TestCandidate {
                 .taskId(taskId)
                 .taskAssignee(assignee)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
 //            交接任务 ,就是设置新的负责人
-            taskService.setAssignee(taskId,candidateUser);
-            System.out.println("taskid-"+taskId+"-交接任务完成");
+            taskService.setAssignee(taskId, candidateUser);
+            System.out.println("taskid-" + taskId + "-交接任务完成");
         }
     }
+
     /**
      * 完成个人任务
      */
     @Test
-    public void completTask(){
+    public void completTask() {
 //        流程定义的Key
         String key = "testCandidate";
 //        任务负责人
@@ -168,7 +169,7 @@ public class TestCandidate {
                 .processDefinitionKey(key)
                 .taskAssignee(assingee)
                 .singleResult();
-        if(task != null){
+        if (task != null) {
             //     根据任务id来   完成任务
             taskService.complete(task.getId());
         }

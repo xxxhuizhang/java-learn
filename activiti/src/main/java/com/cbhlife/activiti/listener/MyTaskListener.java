@@ -14,9 +14,14 @@ public class MyTaskListener implements TaskListener {
 //    @Override
     public void notify(DelegateTask delegateTask) {
 //        判断当前的任务 是 创建申请 并且  是 create事件
-        if("创建申请".equals(delegateTask.getName()) &&
-            "create".equals(delegateTask.getEventName())){
+        if("创建申请".equals(delegateTask.getName()) && "create".equals(delegateTask.getEventName())){
+
             delegateTask.setAssignee("张三");
+
+            //delegateTask.addCandidateUser("李四");
+            //delegateTask.addCandidateUser("王五");
+            //delegateTask.addCandidateUsers();//Collection
+            //delegateTask.addCandidateGroups();//group
         }
 
     }

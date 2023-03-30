@@ -1,0 +1,50 @@
+
+
+### 个人任务
+
+三种分配方式：
+1.在taskProcess.bpmn中直接写 assignee=“张三丰”
+2.在taskProcess.bpmn中写 assignee=“#{userID}”，使用流程变量指定办理人,变量的值要是String的。
+3.使用TaskListener接口，要使类实现该接口，在类中定义：
+delegateTask.setAssignee(assignee);// 指定个人任务的办理人
+
+使用任务ID和办理人重新指定办理人：
+processEngine.getTaskService().setAssignee(taskId, userId);
+
+
+
+### 组任务
+
+1） delegateTask.addCandidateUser(userId); 添加任务候选人。
+2） processEngine.getTaskService().claim(taskId, userId);将组任务分配给个人任务，也叫认领任务，即指定某个人去办理这个任务。
+注意：认领任务的时候，可以是组任务成员中的人，也可以不是组任务成员的人，此时通过Type的类型为participant来指定任务的办理人
+
+3） addCandidateUser()即向组任务添加成员，deleteCandidateUser()即删除组任务的成员。
+在开发中，可以将每一个任务的办理人规定好，例如张三的领导是李四和王五，这样张三提交任务，由李四或者王五去查询组任务，
+可以看到对应张三的申请，李四或王五再通过认领任务（claim）的方式，由某个人去完成这个任务。
+
+总结：
+组任务及三种分配方式：
+​1.在taskProcess.bpmn中直接写  candidate-users=“小A,小B,小C,小D”
+​2.在taskProcess.bpmn中使用变量 candidate-users =“#{userIDs}”，变量的值要是String的。map.put("userIDs", "大大,小小,中中");
+3.使用TaskListener接口，使用类实现该接口，在类中定义： delegateTask.addCandidateUser(userId1);
+
+
+组任务分配给个人任务（认领任务）：
+​ processEngine.getTaskService().claim(taskId, userId);
+个人任务分配给组任务：
+​ processEngine.getTaskService().setAssignee(taskId,null);
+
+向组任务添加人员：
+​ processEngine.getTaskService().addCandidateUser(taskId, userId);
+向组任务删除人员：
+​ processEngine.getTaskService().deleteCandidateUser(taskId, userId);
+个人任务和组任务存放办理人对应的表：
+act_ru_identitylink 表存放任务的办理人，包括个人任务和组任务，表示正在执行的任务
+act_hi_identitylink 表存放任务的办理人，包括个人任务和组任务，表示历史任务
+
+act_ru_identitylink 表中
+个人任务: TYPE_的类型表示participant（参与者） 完成任务的人
+组任务:   TYPE_的类型表示candidate（候选者）
+
+

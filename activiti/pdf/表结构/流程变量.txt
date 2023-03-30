@@ -1,0 +1,42 @@
+
+act_ru_variable：正在执行的流程变量表
+act_hi_varinst：流程变量历史表
+
+流程变量的作用域范围是只对应一个流程实例,也就是说各个流程实例的流程变量是不相互影响的,
+流程实例结束完成以后流程变量还保存在数据库中（存放到流程变量的历史表中）。
+
+设置流程变量：
+1) 流程变量的作用域就是流程实例，在哪个阶段都可以设置
+2) 设置流程变量为基本类型时，在taskService中使用任务ID，定义流程变量的名称，设置流程变量的值。
+3) 设置流程变量为Javabean类型时，需要这个javabean实现了Serializable接口
+4) 使用流程变量，设置连线需要的流程变量的名称 message，并设置流程变量的值
+
+
+
+1） RuntimeService对象可以设置流程变量和获取流程变量，流程实例启动的时候可以设置流程变量
+2） TaskService对象可以设置流程变量和获取流程变量，任务办理完成的时候可以设置流程变量
+3）单个流程变量：流程变量可以通过名称/值的形式设置单个流程变量
+4）多个流程变量：流程变量可以通过Map集合，同时设置多个流程变量
+
+获取流程变量：
+1） 流程变量的获取针对流程实例（即1个流程），每个流程实例获取的流程变量时不同的
+2） 使用基本类型获取流程变量，在taskService中使用任务ID，流程变量的名称，获取流程变量的值。
+3） Javabean类型设置获取流程变量，除了需要这个javabean实现了Serializable接口外，还要求流程变量对象的属性不能发生变化，否则抛出异常。解决方案，固定序列化ID
+
+//runtimeService.setVariable(executionId, variableName, value);
+//runtimeService.setVariables(executionId, variables);//map集合
+//runtimeService.getVariable(executionId, variableName);
+
+//runtimeService.startProcessInstanceById(processDefinitionId, variables);//启动流程实例同时 设置流程变量 map集合
+//runtimeService.getVariables(executionId);
+
+//taskService.complete(taskId, variables);//完成任务同时 设置流程变量
+
+
+
+# act_hi_taskinst 和 act_hi_actinst
+1.Task Instances point to user tasks only.
+2.Activity Instances point to all kinds of activities including user tasks (service task, call activity…)
+3.Process Instance is an instance of a process definition and it lasts until the execution of the whole process is ended.
+4.Method active() returns not suspended instances whereas method unfinished() returns unfinished instances.
+5.using createHistoricProcessInstanceQuery, you are querying historic process instances (not task or activity instances)
