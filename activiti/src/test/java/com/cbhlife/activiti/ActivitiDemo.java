@@ -1,15 +1,13 @@
 package com.cbhlife.activiti;
 
-import org.activiti.engine.HistoryService;
-import org.activiti.engine.ProcessEngine;
-import org.activiti.engine.ProcessEngines;
-import org.activiti.engine.RepositoryService;
+import org.activiti.engine.*;
 import org.activiti.engine.history.HistoricActivityInstance;
 import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.repository.ProcessDefinitionQuery;
 import org.apache.commons.io.IOUtils;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
@@ -21,28 +19,56 @@ import java.util.zip.ZipInputStream;
 
 public class ActivitiDemo {
 
+    private RepositoryService repositoryService;
+
+    @Before
+    public void getRepositoryService() {
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        repositoryService = processEngine.getRepositoryService();
+    }
+
     /**
-     * 使用zip包进行批量的部署
+     * insert into ACT_RE_DEPLOYMENT
+     * insert into ACT_RE_PROCDEF
      */
+
     @Test
     public void deployProcessByZip() {
-//        获取流程引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        获取RepositoryService
-        RepositoryService repositoryService = processEngine.getRepositoryService();
-//        流程部署
-//        读取资源包文件，构造成inputStream
-        InputStream inputStream = this.getClass()
-                .getClassLoader()
+
+        //使用zip包进行批量的部署
+        InputStream inputStream = this.getClass().getClassLoader()
                 .getResourceAsStream("bpmn/evection.zip");
-//        用inputStream 构造ZipInputStream
         ZipInputStream zipInputStream = new ZipInputStream(inputStream);
-//        使用压缩包的流进行流程的部署
+
         Deployment deploy = repositoryService.createDeployment()
                 .addZipInputStream(zipInputStream)
                 .deploy();
         System.out.println("流程部署id=" + deploy.getId());
         System.out.println("流程部署的名称=" + deploy.getName());
+    }
+
+    /**
+     * 使用activiti提供的默认方式来创建mysql的表
+     * <p>
+     * 需要使用avtiviti提供的工具类 ProcessEngines, 使用方法getDefaultProcessEngine
+     * getDefaultProcessEngine会默认从resources下读取名字为actviti.cfg.xml的文件
+     * 创建processEngine时，就会创建mysql的表
+     */
+    @Test
+    public void testCreateDbTable() {
+        repositoryService.createDeployment();
+    }
+
+    @Test
+    public void testCreateDbTable2() {
+
+        ProcessEngineConfiguration processEngineConfiguration =
+                ProcessEngineConfiguration.createProcessEngineConfigurationFromResource
+                        ("activiti.cfg.xml", "processEngineConfiguration");
+
+        ProcessEngine processEngine = processEngineConfiguration.buildProcessEngine();
+        RuntimeService runtimeService = processEngine.getRuntimeService();
+        System.out.println(processEngine);
     }
 
 
@@ -51,19 +77,11 @@ public class ActivitiDemo {
      */
     @Test
     public void queryProcessDefinition() {
-//        获取引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        获取  Repositoryservice
-        RepositoryService repositoryService = processEngine.getRepositoryService();
-//        获取ProcessDifinitionQuery对象
+
         ProcessDefinitionQuery definitionQuery = repositoryService.createProcessDefinitionQuery();
-//        查询当前所有的流程定义 ,返回流程定义信息的集合
-//        processDefinitionKey（流程定义Key）
-//        orderByProcessDefinitionVersion 进行排序
-//        desc 倒叙
-//        list 查询出所有的内容
+        // 多次部署会生成不同verion
         List<ProcessDefinition> definitionList = definitionQuery.processDefinitionKey("myEvection")
-                .orderByProcessDefinitionVersion()
+                .orderByProcessDefinitionVersion() //version
                 .desc()
                 .list();
 //        输出信息
@@ -82,16 +100,26 @@ public class ActivitiDemo {
      * `act_re_deployment`
      * `act_re_procdef`
      * 当前的流程如果并没有完成，想要删除的话需要使用特殊方式，原理就是 级联删除
+     *
+     * delete from ACT_HI_COMMENT where TASK_ID_ ,PROC_INST_ID_
+     * delete from ACT_GE_BYTEARRAY where DEPLOYMENT_ID_ = ?
+     * delete from ACT_RE_DEPLOYMENT where ID_ = ?
+     * delete from ACT_RU_EVENT_SUBSCR
+     * delete from ACT_RU_IDENTITYLINK where ID_  PROC_DEF_ID_=?
+     * delete from ACT_RU_TASK where ID_ = ? and REV_ = ?
+     * delete from ACT_RU_EXECUTION where ID_ = ? and REV_ = ?
+     * delete from ACT_RE_PROCDEF where ID_ = ? and REV_ = ?
+     * delete from ACT_HI_IDENTITYLINK where ID_ = ?
+     * delete from ACT_HI_ACTINST where ID_ = ?
+     * delete from ACT_HI_PROCINST where ID_ = ?
+     * delete from ACT_HI_TASKINST where ID_ = ?
+     *
      */
     @Test
     public void deleteDeployMent() {
-//      获取流程引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        通过引擎来获取 RepositoryService
-        RepositoryService repositoryService = processEngine.getRepositoryService();
-//        通过部署id来删除流程部署信息
-        String deploymentId = "1";
-//        repositoryService.deleteDeployment(deploymentId);
+
+        String deploymentId = "20001";
+        //repositoryService.deleteDeployment(deploymentId);
         repositoryService.deleteDeployment(deploymentId, true);
     }
 
@@ -105,34 +133,26 @@ public class ActivitiDemo {
      */
     @Test
     public void getDeployment() throws IOException {
-//         1、得到引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        2、获取api，RepositoryService
-        RepositoryService repositoryService = processEngine.getRepositoryService();
-//        3、获取查询对象 ProcessDefinitionQuery查询流程定义信息
+
         ProcessDefinition processDefinition = repositoryService.createProcessDefinitionQuery()
                 .processDefinitionKey("myEvection")
                 .singleResult();
-//        4、通过流程定义信息，获取部署ID
+
         String deploymentId = processDefinition.getDeploymentId();
-//        5、通过RepositoryService ，传递部署id参数，读取资源信息（png 和 bpmn）
-//          5.1、获取png图片的流
-//        从流程定义表中，获取png图片的目录和名字
         String pngName = processDefinition.getDiagramResourceName();
-//        通过 部署id和 文件名字来获取图片的资源
+
         InputStream pngInput = repositoryService.getResourceAsStream(deploymentId, pngName);
-//          5.2、获取bpmn的流
         String bpmnName = processDefinition.getResourceName();
         InputStream bpmnInput = repositoryService.getResourceAsStream(deploymentId, bpmnName);
-//        6、构造OutputStream流
-        File pngFile = new File("d:/evectionflow01.png");
-        File bpmnFile = new File("d:/evectionflow01.bpmn");
+
+        File pngFile = new File("./evectionflow01.png");
+        File bpmnFile = new File("./evectionflow01.bpmn");
         FileOutputStream pngOutStream = new FileOutputStream(pngFile);
         FileOutputStream bpmnOutStream = new FileOutputStream(bpmnFile);
-//        7、输入流，输出流的转换
+
         IOUtils.copy(pngInput, pngOutStream);
         IOUtils.copy(bpmnInput, bpmnOutStream);
-//        8、关闭流
+
         pngOutStream.close();
         bpmnOutStream.close();
         pngInput.close();
@@ -144,19 +164,15 @@ public class ActivitiDemo {
      */
     @Test
     public void findHistoryInfo() {
-//      获取引擎
+
         ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        获取HistoryService
         HistoryService historyService = processEngine.getHistoryService();
-//        获取 actinst表的查询对象
+        //获取 actinst表的查询对象
         HistoricActivityInstanceQuery instanceQuery = historyService.createHistoricActivityInstanceQuery();
-//        查询 actinst表，条件：根据 InstanceId 查询
-//        instanceQuery.processInstanceId("2501");
-//        查询 actinst表，条件：根据 DefinitionId 查询
-        instanceQuery.processDefinitionId("myEvection:1:4");
-//        增加排序操作,orderByHistoricActivityInstanceStartTime 根据开始时间排序 asc 升序
+        //instanceQuery.processInstanceId("2501"); // actinst表，根据 InstanceId 查询
+        instanceQuery.processDefinitionId("myEvection:1:4"); // actinst表，根据 DefinitionId 查询
         instanceQuery.orderByHistoricActivityInstanceStartTime().asc();
-//        查询所有内容
+
         List<HistoricActivityInstance> activityInstanceList = instanceQuery.list();
 //        输出
         for (HistoricActivityInstance hi : activityInstanceList) {

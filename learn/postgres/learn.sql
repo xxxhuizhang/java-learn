@@ -7,6 +7,10 @@ docker exec -it postgres psql mydb -U  postgres
 createdb  mydb;
 dropdb mydb;
 
+create database activiti;
+create schema activiti;
+drop schema activiti;
+
 
 1、相当与mysql的show databases;
 select datname from pg_database;
