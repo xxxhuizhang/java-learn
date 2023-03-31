@@ -118,7 +118,7 @@ public class ActivitiDemo {
     @Test
     public void deleteDeployMent() {
 
-        String deploymentId = "20001";
+        String deploymentId = "60001";
         //repositoryService.deleteDeployment(deploymentId);
         repositoryService.deleteDeployment(deploymentId, true);
     }

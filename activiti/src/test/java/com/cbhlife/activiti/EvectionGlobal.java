@@ -5,6 +5,7 @@ import com.cbhlife.activiti.pojo.Evection;
 import org.activiti.engine.*;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.task.Task;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
@@ -14,21 +15,37 @@ import java.util.Map;
  * 测试流程变量
  */
 public class EvectionGlobal {
-    /**
-     * 流程部署
-     */
+
+    private static String processDefinitionKey = "evection-global";
+
+    private RepositoryService repositoryService;
+    private RuntimeService runtimeService;
+    private TaskService taskService;
+
+    @Before
+    public void getRepositoryService() {
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        repositoryService = processEngine.getRepositoryService();
+        runtimeService = processEngine.getRuntimeService();
+        taskService = processEngine.getTaskService();
+    }
+
+    private Task getUserTask(String assingee) {
+        return taskService.createTaskQuery()
+                .processDefinitionKey(processDefinitionKey)
+                .taskAssignee(assingee)
+                .singleResult();
+    }
+
+
     @Test
     public void testDeployment() {
-//        1、创建ProcessEngine
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        2、获取RepositoryServcie
-        RepositoryService repositoryService = processEngine.getRepositoryService();
-//        3、使用service进行流程的部署，定义一个流程的名字，把bpmn和png部署到数据中
+
         Deployment deploy = repositoryService.createDeployment()
                 .name("出差申请流程-variables1")
                 .addClasspathResource("bpmn/evection-global.bpmn")
                 .deploy();
-//        4、输出部署信息
+
         System.out.println("流程部署id=" + deploy.getId());
         System.out.println("流程部署名字=" + deploy.getName());
     }
@@ -40,56 +57,90 @@ public class EvectionGlobal {
      */
     @Test
     public void testStartProcess() {
-//        获取流程引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        获取RunTimeService
-        RuntimeService runtimeService = processEngine.getRuntimeService();
-//        流程定义的Key
-        String key = "myEvection2";
-//        流程变量的map
+
         Map<String, Object> variables = new HashMap<>();
-//        设置流程变量
         Evection evection = new Evection();
-//        设置出差日期
         evection.setNum(3d);
-//        把流程变量的pojo放入map
+
         variables.put("evection", evection);
-//        设定任务的负责人
-        variables.put("assignee0", "李四1");
-        variables.put("assignee1", "王经理1");
-        variables.put("assignee2", "杨总经理1");
-        variables.put("assignee3", "张财务1");
-//        启动流程
-        runtimeService.startProcessInstanceByKey(key, variables);
+        variables.put("assignee0", "李四");
+        variables.put("assignee1", "王经理");
+        variables.put("assignee2", "杨总经理");
+        variables.put("assignee3", "张财务");
+
+        runtimeService.startProcessInstanceByKey(processDefinitionKey, variables);
     }
 
+
     /**
-     * 完成个人任务
+     * <userTask activiti:assignee="${assignee0}" activiti:exclusive="true" id="_3" name="创建出差申请"/>
+     * <userTask activiti:assignee="${assignee1}" activiti:exclusive="true" id="_4" name="部门经理审核"/>
+     * <userTask activiti:assignee="${assignee2}" activiti:exclusive="true" id="_5" name="总经理审批"/>
+     * <userTask activiti:assignee="${assignee3}" activiti:exclusive="true" id="_6" name="财务审批"/>
      */
     @Test
-    public void completTask() {
-//        流程定义的Key
-        String key = "myEvection2";
-//        任务负责人
-//        String assingee = "李四1";
-//        String assingee = "王经理1";
-//        String assingee = "杨总经理1";
-        String assingee = "张财务1";
-        //        获取流程引擎
-        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
-//        获取taskservice
-        TaskService taskService = processEngine.getTaskService();
-//        查询任务
-        Task task = taskService.createTaskQuery()
-                .processDefinitionKey(key)
-                .taskAssignee(assingee)
-                .singleResult();
+    public void completTask1() {
+
+        String assingee1 = "李四1";
+        String assingee2 = "王经理1";
+        String assingee3 = "杨总经理1";
+        String assingee4 = "张财务1";
+
+        final Task task = getUserTask(assingee1);
+
+
         if (task != null) {
-            //     根据任务id来   完成任务
             taskService.complete(task.getId());
-//            taskService.complete(task.getId(),map); //自定义的变量map可以在这里传
+            //taskService.complete(task.getId(),map); //自定义的变量map可以在这里传
+            System.out.println(task.getId() + "----任务已完成");
+        }
+    }
+
+    @Test
+    public void completTask2() {
+
+        String assingee1 = "李四2";
+        String assingee2 = "王经理2";
+        String assingee3 = "杨总经理2";
+        String assingee4 = "张财务2";
+
+        Task task = taskService.createTaskQuery()
+                .processDefinitionKey(processDefinitionKey)
+                .taskAssignee(assingee1)
+                .singleResult();
+
+        if (task != null) {
+            taskService.complete(task.getId());
+            //taskService.complete(task.getId(),map); //自定义的变量map可以在这里传
+            System.out.println(task.getId() + "----任务已完成");
+        }
+    }
+
+
+    @Test
+    public void completTask3() {
+
+        String assingee1 = "李四3";
+        String assingee2 = "王经理3";
+        String assingee3 = "杨总经理3";
+        String assingee4 = "张财务3";
+
+        Evection evection = new Evection();
+        evection.setNum(2d);
+        Map<String, Object> map = new HashMap<>();
+        map.put("evection", evection);
+
+        Task task = taskService.createTaskQuery()
+                .processDefinitionKey(processDefinitionKey)
+                .taskAssignee(assingee1)
+                .singleResult();
+
+        if (task != null) {
+            taskService.complete(task.getId(), map);
             System.out.println(task.getId() + "----任务已完成");
         }
 
     }
+
+
 }
