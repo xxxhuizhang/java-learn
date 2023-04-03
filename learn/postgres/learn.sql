@@ -1,6 +1,4 @@
 
-
-
 docker exec -it postgres psql -U  postgres
 docker exec -it postgres psql mydb -U  postgres
 
@@ -10,6 +8,7 @@ dropdb mydb;
 create database activiti;
 create schema activiti;
 drop schema activiti;
+alter schema activiti owner to activiti ;
 
 
 1、相当与mysql的show databases;
