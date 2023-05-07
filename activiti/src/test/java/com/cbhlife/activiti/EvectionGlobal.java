@@ -32,7 +32,6 @@ public class EvectionGlobal {
         repositoryService = processEngine.getRepositoryService();
         runtimeService = processEngine.getRuntimeService();
         taskService = processEngine.getTaskService();
-
     }
 
     private Task getUserTask(String assingee, String processInstanceId) {
@@ -117,15 +116,6 @@ public class EvectionGlobal {
             taskService.complete(task.getId());
             //taskService.complete(task.getId(),map); //自定义的变量map可以在这里传
             System.out.println(task.getId() + "----任务已完成");
-        }
-
-        UserTask userTask = (UserTask) task;
-        String documentation = userTask.getDocumentation();
-        List<SequenceFlow> outgoingFlows = userTask.getOutgoingFlows();
-
-        for (SequenceFlow outgoingFlow : outgoingFlows) {
-            String conditionExpression = outgoingFlow.getConditionExpression();
-
         }
 
 

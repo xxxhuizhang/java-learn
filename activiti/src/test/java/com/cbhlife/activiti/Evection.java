@@ -1,6 +1,8 @@
 package com.cbhlife.activiti;
 
 import org.activiti.engine.*;
+import org.activiti.engine.history.HistoricActivityInstance;
+import org.activiti.engine.history.HistoricActivityInstanceQuery;
 import org.activiti.engine.repository.Deployment;
 import org.activiti.engine.repository.ProcessDefinition;
 import org.activiti.engine.runtime.ProcessInstance;
@@ -56,7 +58,6 @@ public class Evection {
      * `act_ru_task`         流程当前任务信息
      * `act_ru_identitylink`  流程的正在参与用户信息
      * `ACT_RU_VARIABLE`      流程的运行时变量
-     *
      */
     @Test
     public void testStartProcess() {
@@ -227,6 +228,32 @@ public class Evection {
         } else { // 如果已经激活，就执行激活暂停
             runtimeService.suspendProcessInstanceById(instanceId);
             System.out.println("流程实例id:" + instanceId + "已经暂停");
+        }
+    }
+
+
+    /**
+     * 查看历史信息
+     */
+    @Test
+    public void findHistoryInfo() {
+
+        ProcessEngine processEngine = ProcessEngines.getDefaultProcessEngine();
+        HistoryService historyService = processEngine.getHistoryService();
+        //获取 actinst表的查询对象
+        HistoricActivityInstanceQuery instanceQuery = historyService.createHistoricActivityInstanceQuery();
+        //instanceQuery.processInstanceId("2501"); // actinst表，根据 InstanceId 查询
+        instanceQuery.processDefinitionId("myEvection:1:4"); // actinst表，根据 DefinitionId 查询
+        instanceQuery.orderByHistoricActivityInstanceStartTime().asc();
+
+        List<HistoricActivityInstance> activityInstanceList = instanceQuery.list();
+
+        for (HistoricActivityInstance hi : activityInstanceList) {
+            System.out.println(hi.getActivityId());
+            System.out.println(hi.getActivityName());
+            System.out.println(hi.getProcessDefinitionId());
+            System.out.println(hi.getProcessInstanceId());
+            System.out.println("<==========================>");
         }
     }
 

@@ -1,5 +1,6 @@
 
 # https://blog.csdn.net/sdaujsj1/category_7399595.html
+# https://blog.csdn.net/m0_46509482/article/details/124916963
 
 
 候选者candidate 参与者participate
@@ -17,7 +18,7 @@
 流程部署涉及的表：
 
 二， 通用数据表
-act_ge_* ge代表general 通用的 一般的
+act_ge_*  ge 代表general 通用的 一般的
 
 2. act_ge_bytearray 通用流程定义和流程资源表
 3. act_ge_property  属性数据表

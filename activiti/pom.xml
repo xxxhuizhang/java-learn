@@ -17,6 +17,7 @@
         <slf4j.version>1.6.6</slf4j.version>
         <log4j.version>1.2.12</log4j.version>
         <activiti.version>7.0.0.Beta1</activiti.version>
+        <postgresql.version>1.12.4</postgresql.version>
     </properties>
     <dependencies>
         <dependency>
@@ -66,9 +67,9 @@
             <version>5.1.47</version>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
+            <groupId>org.testcontainers</groupId>
             <artifactId>postgresql</artifactId>
-            <version>42.2.20</version>
+            <version>${postgresql.version}</version>
         </dependency>
         <!-- mybatis -->
         <dependency>
